@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Discover | Ocean Explorer</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600&display=swap');
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+    --cyan: #73f6ff;
+    --blue: #087ea4;
+    --deep: #010b17;
+    --deep2: #020f1c;
+    --glass: rgba(255,255,255,.07);
+    --text: #d7f5fa;
+    --muted: #7195a1;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background: var(--deep);
+    color: white;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+.cursor-glow {
+    position: fixed;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(75,230,255,.12),
+            transparent 65%
+        );
+
+    transform: translate(-50%, -50%);
+
+    z-index: 50;
+
+    transition:
+        left .08s linear,
+        top .08s linear;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 25px 6%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 20;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(1,11,23,.95),
+            rgba(1,11,23,.65),
+            transparent
+        );
+
+    backdrop-filter: blur(8px);
+}
+
+.logo {
+    font-size: 14px;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+}
+
+.logo span {
+    color: var(--cyan);
+}
+
+nav .links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    color: rgba(255,255,255,.65);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--cyan);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            rgba(35,193,230,.22),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #063d59 0%,
+            #022b43 30%,
+            #011421 65%,
+            #00070d 100%
+        );
+}
+
+
+/* sunlight */
+
+.sunlight {
+    position: absolute;
+
+    width: 1000px;
+    height: 1000px;
+
+    top: -600px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background:
+        conic-gradient(
+            from 180deg,
+            transparent,
+            rgba(123,241,255,.12),
+            transparent 20%,
+            rgba(123,241,255,.08),
+            transparent 40%
+        );
+
+    filter: blur(25px);
+
+    animation:
+        sunlightMove 8s ease-in-out infinite alternate;
+}
+
+@keyframes sunlightMove {
+
+    from {
+        transform:
+            translateX(-50%)
+            rotate(-5deg);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            rotate(5deg);
+    }
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.hero-content {
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 950px;
+
+    padding:
+        130px
+        25px
+        100px;
+}
+
+.eyebrow {
+    color: var(--cyan);
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-family: "Playfair Display", serif;
+
+    font-size:
+        clamp(
+            65px,
+            11vw,
+            150px
+        );
+
+    line-height: .86;
+
+    letter-spacing: -7px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #8eeeff 75%,
+            #4dc8e2
+        );
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+
+    text-shadow:
+        0 15px 50px
+        rgba(0,200,255,.15);
+}
+
+.hero-description {
+    max-width: 600px;
+
+    margin: 35px auto 0;
+
+    color: #b6dce7;
+
+    line-height: 1.8;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   HERO BUTTON
+========================================================= */
+
+.start-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 35px;
+
+    padding: 15px 25px;
+
+    border:
+        1px solid
+        rgba(115,246,255,.5);
+
+    border-radius: 100px;
+
+    color: white;
+
+    text-decoration: none;
+
+    background:
+        rgba(255,255,255,.05);
+
+    backdrop-filter: blur(10px);
+
+    transition: .35s;
+}
+
+.start-button:hover {
+    background: var(--cyan);
+
+    color: #00202d;
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,220,255,.25);
+}
+
+
+/* =========================================================
+   BUBBLES
+========================================================= */
+
+.bubbles span {
+    position: absolute;
+
+    bottom: -50px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
+    border-radius: 50%;
+
+    animation:
+        rise linear infinite;
+}
+
+@keyframes rise {
+
+    0% {
+        transform:
+            translateY(0)
+            translateX(0);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .5;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            translateX(40px);
+
+        opacity: 0;
+    }
+}
+
+.bubbles span:nth-child(1) {
+    left: 8%;
+
+    width: 8px;
+    height: 8px;
+
+    animation-duration: 12s;
+}
+
+.bubbles span:nth-child(2) {
+    left: 20%;
+
+    width: 14px;
+    height: 14px;
+
+    animation-duration: 16s;
+
+    animation-delay: 3s;
+}
+
+.bubbles span:nth-child(3) {
+    left: 38%;
+
+    width: 6px;
+    height: 6px;
+
+    animation-duration: 10s;
+
+    animation-delay: 2s;
+}
+
+.bubbles span:nth-child(4) {
+    left: 67%;
+
+    width: 18px;
+    height: 18px;
+
+    animation-duration: 18s;
+
+    animation-delay: 5s;
+}
+
+.bubbles span:nth-child(5) {
+    left: 85%;
+
+    width: 9px;
+    height: 9px;
+
+    animation-duration: 13s;
+
+    animation-delay: 1s;
+}
+
+.bubbles span:nth-child(6) {
+    left: 55%;
+
+    width: 11px;
+    height: 11px;
+
+    animation-duration: 15s;
+
+    animation-delay: 6s;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+    padding:
+        130px 7%
+        80px;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            #063c50,
+            transparent 30%
+        ),
+        #010b15;
+}
+
+.section-number {
+    color: var(--cyan);
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+.intro h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size:
+        clamp(
+            45px,
+            7vw,
+            90px
+        );
+
+    line-height: 1;
+
+    margin-top: 15px;
+
+    max-width: 800px;
+}
+
+.intro p {
+    max-width: 650px;
+
+    margin-top: 25px;
+
+    color: var(--muted);
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   FACT SECTION
+========================================================= */
+
+.facts {
+    padding:
+        70px 7%
+        140px;
+
+    background: #010b15;
+}
+
+.fact-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 25px;
+
+    max-width: 1200px;
+
+    margin: 60px auto 0;
+}
+
+
+/* =========================================================
+   FACT CARD
+========================================================= */
+
+.fact-card {
+    position: relative;
+
+    min-height: 380px;
+
+    padding: 40px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(11,71,94,.55),
+            rgba(1,13,24,.9)
+        );
+
+    transition:
+        transform .5s,
+        border-color .5s,
+        box-shadow .5s;
+
+    opacity: 0;
+
+    transform:
+        translateY(60px);
+}
+
+.fact-card.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+.fact-card:hover {
+    transform:
+        translateY(-10px);
+
+    border-color:
+        rgba(115,246,255,.35);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,180,220,.12);
+}
+
+
+/* decorative circle */
+
+.fact-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    right: -90px;
+    top: -90px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(115,246,255,.14),
+            transparent 70%
+        );
+}
+
+
+/* number */
+
+.fact-number {
+    color: var(--cyan);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+}
+
+
+/* icon */
+
+.fact-icon {
+    font-size: 50px;
+
+    margin:
+        25px 0 20px;
+
+    opacity: .9;
+}
+
+
+/* title */
+
+.fact-card h3 {
+    position: relative;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 32px;
+
+    margin-bottom: 15px;
+}
+
+.fact-card p {
+    position: relative;
+
+    color: #8db5c0;
+
+    line-height: 1.8;
+
+    font-size: 14px;
+
+    max-width: 500px;
+}
+
+
+/* =========================================================
+   WIDE FACT
+========================================================= */
+
+.fact-wide {
+    grid-column: 1 / -1;
+
+    min-height: 300px;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 40px;
+}
+
+.fact-wide-text {
+    max-width: 650px;
+}
+
+.fact-big-number {
+    font-size:
+        clamp(
+            70px,
+            12vw,
+            150px
+        );
+
+    font-weight: 700;
+
+    letter-spacing: -8px;
+
+    color: var(--cyan);
+
+    opacity: .9;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   OCEAN LAYERS
+========================================================= */
+
+.layers {
+    padding:
+        130px 7%
+        150px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #010b15,
+            #00101c,
+            #00050b
+        );
+}
+
+.layers-header {
+    max-width: 650px;
+
+    margin-bottom: 70px;
+}
+
+.layers-header h2 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            45px,
+            6vw,
+            80px
+        );
+
+    margin:
+        12px 0 20px;
+}
+
+.layers-header p {
+    color: var(--muted);
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   OCEAN DEPTH DISPLAY
+========================================================= */
+
+.depth-explorer {
+    max-width: 1000px;
+
+    margin: auto;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+
+/* depth bar */
+
+.depth-bar {
+    height: 550px;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #075b78 0%,
+            #03435e 15%,
+            #022d46 30%,
+            #011c2f 48%,
+            #010f1d 68%,
+            #00050c 100%
+        );
+}
+
+
+/* horizontal layers */
+
+.ocean-layer {
+    position: absolute;
+
+    left: 0;
+
+    width: 100%;
+
+    padding: 15px 25px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+
+    color:
+        rgba(255,255,255,.7);
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.ocean-layer:hover {
+    color: white;
+
+    background:
+        rgba(115,246,255,.06);
+}
+
+.layer-surface {
+    top: 8%;
+}
+
+.layer-twilight {
+    top: 28%;
+}
+
+.layer-midnight {
+    top: 52%;
+}
+
+.layer-abyss {
+    top: 75%;
+}
+
+.layer-hadal {
+    top: 91%;
+}
+
+
+/* =========================================================
+   DEPTH INFORMATION
+========================================================= */
+
+.layer-info {
+    padding: 35px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+
+    min-height: 130px;
+}
+
+.layer-info h3 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+.layer-info p {
+    color: var(--muted);
+
+    line-height: 1.7;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RANDOM FACT
+========================================================= */
+
+.random-section {
+    padding:
+        130px 7%
+        150px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,120,170,.16),
+            transparent 45%
+        ),
+        #00070d;
+}
+
+.random-section .eyebrow {
+    margin-bottom: 15px;
+}
+
+.random-section h2 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            45px,
+            6vw,
+            75px
+        );
+}
+
+.random-box {
+    max-width: 700px;
+
+    min-height: 220px;
+
+    margin:
+        45px auto 30px;
+
+    padding: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(115,246,255,.2);
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    backdrop-filter:
+        blur(10px);
+}
+
+#randomFact {
+    color: #c4eaf0;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+/* random button */
+
+.random-button {
+    border: none;
+
+    padding:
+        15px 25px;
+
+    border-radius: 100px;
+
+    background: var(--cyan);
+
+    color: #00202d;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.random-button:hover {
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,220,255,.2);
+}
+
+
+/* =========================================================
+   CHALLENGER DEEP TEASER
+========================================================= */
+
+.challenger {
+    min-height: 600px;
+
+    padding:
+        130px 7%;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 70% 50%,
+            rgba(0,100,150,.15),
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            #00070d,
+            #000208
+        );
+}
+
+.challenger-content {
+    max-width: 750px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.challenger h2 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(
+            50px,
+            7vw,
+            95px
+        );
+
+    line-height: .95;
+
+    margin:
+        15px 0 25px;
+}
+
+.challenger p {
+    color: #7799a4;
+
+    max-width: 600px;
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+
+/* giant background text */
+
+.deep-text {
+    position: absolute;
+
+    right: -100px;
+
+    bottom: -80px;
+
+    font-size:
+        clamp(
+            120px,
+            25vw,
+            350px
+        );
+
+    font-weight: 700;
+
+    color:
+        rgba(115,246,255,.025);
+
+    letter-spacing:
+        -15px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding:
+        35px 7%;
+
+    background:
+        #000307;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    color:
+        #47636c;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.scroll {
+    position: absolute;
+
+    bottom: 30px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color:
+        rgba(255,255,255,.45);
+
+    animation:
+        floating 2s
+        infinite
+        ease-in-out;
+}
+
+@keyframes floating {
+
+    50% {
+        transform:
+            translate(
+                -50%,
+                -8px
+            );
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    nav {
+        padding: 20px 5%;
+    }
+
+    nav .links {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+    .hero h1 {
+        letter-spacing: -4px;
+    }
+
+    .fact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fact-wide {
+        grid-column: auto;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .fact-big-number {
+        font-size: 80px;
+    }
+
+    .depth-bar {
+        height: 450px;
+    }
+
+    .challenger {
+        min-height: 500px;
+    }
+
+    footer {
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     CURSOR
+======================================================= -->
+
+<div class="cursor-glow"></div>
+
+
+<!-- =======================================================
+     NAVIGATION
+======================================================= -->
+
+<nav>
+
+    <div class="logo">
+        OCEAN<span>/</span>EXPLORER
+    </div>
+
+    <div class="links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="explore.html">
+            Explore
+        </a>
+
+        <a href="discover.html">
+            Discover
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section class="hero">
+
+    <div class="sunlight"></div>
+
+
+    <div class="bubbles">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            02 / Ocean Discoveries
+        </div>
+
+
+        <h1>
+            DISCOVER<br>
+            THE UNKNOWN
+        </h1>
+
+
+        <p class="hero-description">
+
+            The ocean is filled with strange creatures,
+            unbelievable environments, ancient mysteries,
+            and facts that sound almost impossible.
+
+            Dive deeper and discover just how extraordinary
+            our blue planet really is.
+
+        </p>
+
+
+        <a
+            href="#facts"
+            class="start-button"
+        >
+
+            Discover facts
+
+            <span>↓</span>
+
+        </a>
+
+    </div>
+
+
+    <div class="scroll">
+        SCROLL TO DISCOVER ↓
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     INTRO
+======================================================= -->
+
+<section class="intro">
+
+    <div class="section-number">
+        01 / DID YOU KNOW?
+    </div>
+
+
+    <h2>
+        The ocean is stranger
+        than fiction.
+    </h2>
+
+
+    <p>
+
+        From animals that can change color to places where
+        sunlight never reaches, the underwater world is full
+        of surprises.
+
+        Here are some of the most fascinating facts about
+        Earth's oceans.
+
+    </p>
+
+</section>
+
+
+
+<!-- =======================================================
+     FACTS
+======================================================= -->
+
+<section
+    class="facts"
+    id="facts"
+>
+
+
+    <div class="fact-grid">
+
+
+        <!-- FACT 01 -->
+
+        <article class="fact-card">
+
+            <div class="fact-number">
+                FACT 001
+            </div>
+
+            <div class="fact-icon">
+                🌊
+            </div>
+
+            <h3>
+                The ocean is enormous.
+            </h3>
+
+            <p>
+
+                The ocean covers about 71% of Earth's
+                surface, making it one of the biggest
+                environments on our planet.
+
+            </p>
+
+        </article>
+
+
+
+        <!-- FACT 02 -->
+
+        <article class="fact-card">
+
+            <div class="fact-number">
+                FACT 002
+            </div>
+
+            <div class="fact-icon">
+                🐙
+            </div>
+
+            <h3>
+                Octopuses have three hearts.
+            </h3>
+
+            <p>
+
+                An octopus has three hearts.
+
+                Two pump blood toward the gills,
+                while the third pumps blood to the
+                rest of the body.
+
+            </p>
+
+        </article>
+
+
+
+        <!-- FACT 03 -->
+
+        <article class="fact-card">
+
+            <div class="fact-number">
+                FACT 003
+            </div>
+
+            <div class="fact-icon">
+                🌑
+            </div>
+
+            <h3>
+                The deep sea is completely dark.
+            </h3>
+
+            <p>
+
+                Sunlight cannot reach the deepest parts
+                of the ocean.
+
+                Below the sunlit zone, darkness dominates
+                and many animals produce their own light.
+
+            </p>
+
+        </article>
+
+
+
+        <!-- FACT 04 -->
+
+        <article class="fact-card">
+
+            <div class="fact-number">
+                FACT 004
+            </div>
+
+            <div class="fact-icon">
+                ✨
+            </div>
+
+            <h3>
+                Some animals make their own light.
+            </h3>
+
+            <p>
+
+                Bioluminescence allows certain marine
+                organisms to produce light through
+                chemical reactions.
+
+                It can be used for communication,
+                attracting prey, or avoiding predators.
+
+            </p>
+
+        </article>
+
+
+
+        <!-- FACT 05 -->
+
+        <article class="fact-card">
+
+            <div class="fact-number">
+                FACT 005
+            </div>
+
+            <div class="fact-icon">
+                🧊
+            </div>
+
+            <h3>
+                There are underwater mountains.
+            </h3>
+
+            <p>
+
+                The seafloor contains enormous mountain
+                ranges, volcanoes, valleys, trenches,
+                and plains.
+
+                Much of this landscape is hidden beneath
+                kilometers of water.
+
+            </p>
+
+        </article>
+
+
+
+        <!-- FACT 06 -->
+
+        <article class="fact-card">
+
+            <div class="fact-number">
+                FACT 006
+            </div>
+
+            <div class="fact-icon">
+                🦈
+            </div>
+
+            <h3>
+                Sharks are ancient.
+            </h3>
+
+            <p>
+
+                Sharks have existed for hundreds of
+                millions of years.
+
+                Their evolutionary history stretches
+                back long before humans appeared.
+
+            </p>
+
+        </article>
+
+
+
+        <!-- WIDE FACT -->
+
+        <article
+            class="fact-card fact-wide"
+        >
+
+            <div class="fact-wide-text">
+
+                <div class="fact-number">
+                    FACT 007
+                </div>
+
+                <div class="fact-icon">
+                    🌍
+                </div>
+
+                <h3>
+                    We have explored only a fraction
+                    of the ocean.
+                </h3>
+
+                <p>
+
+                    Despite the technology available to
+                    modern explorers, huge parts of the
+                    ocean remain poorly understood.
+
+                    Every expedition can reveal something
+                    new.
+
+                </p>
+
+            </div>
+
+
+            <div class="fact-big-number">
+                ?%
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     OCEAN LAYERS
+======================================================= -->
+
+<section class="layers">
+
+
+    <div class="layers-header">
+
+        <div class="section-number">
+            02 / GO DEEPER
+        </div>
+
+
+        <h2>
+            Five worlds
+            beneath the waves.
+        </h2>
+
+
+        <p>
+
+            The ocean isn't one single environment.
+
+            As you descend, light disappears,
+            temperatures change, and pressure increases.
+
+            Click a layer to learn more.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="depth-explorer">
+
+
+        <div class="depth-bar">
+
+
+            <div
+                class="ocean-layer layer-surface"
+                data-title="Sunlight Zone"
+                data-description="The upper ocean receives enough sunlight for photosynthesis. This zone contains many familiar marine ecosystems."
+            >
+                0–200 m · SUNLIGHT ZONE
+            </div>
+
+
+            <div
+                class="ocean-layer layer-twilight"
+                data-title="Twilight Zone"
+                data-description="Light becomes extremely limited in this region. Many animals here migrate vertically between the deep ocean and surface waters."
+            >
+                200–1,000 m · TWILIGHT ZONE
+            </div>
+
+
+            <div
+                class="ocean-layer layer-midnight"
+                data-title="Midnight Zone"
+                data-description="Sunlight no longer reaches this region. Many creatures rely on adaptations such as bioluminescence to survive."
+            >
+                1,000–4,000 m · MIDNIGHT ZONE
+            </div>
+
+
+            <div
+                class="ocean-layer layer-abyss"
+                data-title="Abyssal Zone"
+                data-description="The abyssal ocean is extremely cold, dark, and under immense pressure. Life here has adapted to some of the harshest conditions on Earth."
+            >
+                4,000–6,000 m · ABYSSAL ZONE
+            </div>
+
+
+            <div
+                class="ocean-layer layer-hadal"
+                data-title="Hadal Zone"
+                data-description="The deepest ocean environments occur inside trenches. Challenger Deep, inside the Mariana Trench, lies within this extreme environment."
+            >
+                6,000 m+ · HADAL ZONE
+            </div>
+
+
+        </div>
+
+
+        <div class="layer-info">
+
+            <h3 id="layerTitle">
+                Choose a depth.
+            </h3>
+
+            <p id="layerDescription">
+
+                Click one of the ocean layers above to
+                discover what happens as you travel deeper.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     RANDOM FACT
+======================================================= -->
+
+<section class="random-section">
+
+
+    <div class="eyebrow">
+        03 / RANDOM DISCOVERY
+    </div>
+
+
+    <h2>
+        Give me a fact.
+    </h2>
+
+
+    <div class="random-box">
+
+        <p id="randomFact">
+
+            Click the button below and discover
+            something unexpected about the ocean.
+
+        </p>
+
+    </div>
+
+
+    <button
+        class="random-button"
+        id="randomButton"
+    >
+        Reveal a random fact
+    </button>
+
+
+</section>
+
+
+
+<!-- =======================================================
+     CHALLENGER DEEP
+======================================================= -->
+
+<section class="challenger">
+
+
+    <div class="challenger-content">
+
+
+        <div class="section-number">
+            04 / THE DEEP
+        </div>
+
+
+        <h2>
+            And then there's
+            Challenger Deep.
+        </h2>
+
+
+        <p>
+
+            Hidden inside the Mariana Trench is
+            Challenger Deep, the deepest known point
+            in Earth's oceans.
+
+            It is a place where pressure becomes
+            extraordinary, temperatures are low,
+            and exploration becomes an enormous
+            technological challenge.
+
+            <br><br>
+
+            Want to learn how humans reached it?
+
+        </p>
+
+
+        <a
+            href="about.html"
+            class="start-button"
+        >
+
+            Explore its history
+
+            <span>→</span>
+
+        </a>
+
+
+    </div>
+
+
+    <div class="deep-text">
+        DEEP
+    </div>
+
+
+</section>
+
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+    <span>
+        OCEAN / EXPLORER
+    </span>
+
+    <span>
+        DISCOVER • PROTECT • EXPLORE
+    </span>
+
+</footer>
+
+
+
+<script>
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+const glow =
+    document.querySelector(
+        ".cursor-glow"
+    );
+
+
+document.addEventListener(
+    "mousemove",
+    (event) => {
+
+        glow.style.left =
+            event.clientX + "px";
+
+        glow.style.top =
+            event.clientY + "px";
+
+    }
+);
+
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const cards =
+    document.querySelectorAll(
+        ".fact-card"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(
+                (entry) => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: .15
+        }
+    );
+
+
+cards.forEach(
+    card => observer.observe(card)
+);
+
+
+
+/* =========================================================
+   OCEAN LAYER INTERACTION
+========================================================= */
+
+const layers =
+    document.querySelectorAll(
+        ".ocean-layer"
+    );
+
+
+const layerTitle =
+    document.querySelector(
+        "#layerTitle"
+    );
+
+
+const layerDescription =
+    document.querySelector(
+        "#layerDescription"
+    );
+
+
+layers.forEach(
+    layer => {
+
+        layer.addEventListener(
+            "click",
+            () => {
+
+                const title =
+                    layer.dataset.title;
+
+                const description =
+                    layer.dataset.description;
+
+
+                layerTitle.textContent =
+                    title;
+
+                layerDescription.textContent =
+                    description;
+
+
+                layers.forEach(
+                    item => {
+
+                        item.style
+                            .background =
+                            "";
+
+                    }
+                );
+
+
+                layer.style.background =
+                    "rgba(115,246,255,.08)";
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   RANDOM FACTS
+========================================================= */
+
+const randomFacts = [
+
+    "Octopuses have three hearts, and their blood is blue.",
+
+    "Some jellyfish have existed in Earth's oceans for hundreds of millions of years.",
+
+    "The blue whale is the largest animal known to have ever lived.",
+
+    "Some deep-sea animals produce their own light through bioluminescence.",
+
+    "The Mariana Trench is deeper than Mount Everest is tall.",
+
+    "There are enormous mountain ranges beneath the ocean.",
+
+    "Ocean pressure increases dramatically as depth increases.",
+
+    "Some marine animals can survive in environments with no sunlight.",
+
+    "Sea turtles can travel enormous distances across the ocean.",
+
+    "The deep ocean contains ecosystems that scientists are still discovering.",
+
+    "Some fish produce light using special organs or relationships with bioluminescent bacteria.",
+
+    "Hydrothermal vents can support ecosystems without relying directly on sunlight."
+
+];
+
+
+const randomFact =
+    document.querySelector(
+        "#randomFact"
+    );
+
+
+const randomButton =
+    document.querySelector(
+        "#randomButton"
+    );
+
+
+randomButton.addEventListener(
+    "click",
+    () => {
+
+        const randomIndex =
+            Math.floor(
+                Math.random()
+                * randomFacts.length
+            );
+
+
+        randomFact.style.opacity = "0";
+
+
+        setTimeout(
+            () => {
+
+                randomFact.textContent =
+                    randomFacts[randomIndex];
+
+                randomFact.style.opacity =
+                    "1";
+
+            },
+            200
+        );
+
+    }
+);
+
+
+/* smooth transition */
+
+randomFact.style.transition =
+    "opacity .2s ease";
+
+
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+const sunlight =
+    document.querySelector(
+        ".sunlight"
+    );
+
+
+document.addEventListener(
+    "mousemove",
+    (event) => {
+
+        const x =
+            (
+                event.clientX /
+                window.innerWidth
+                - .5
+            ) * 20;
+
+
+        const y =
+            (
+                event.clientY /
+                window.innerHeight
+                - .5
+            ) * 20;
+
+
+        sunlight.style.marginLeft =
+            x + "px";
+
+        sunlight.style.marginTop =
+            y + "px";
+
+    }
+);
+
+
+/* =========================================================
+   CARD MOUSE TILT
+========================================================= */
+
+document
+    .querySelectorAll(".fact-card")
+    .forEach(
+        card => {
+
+            card.addEventListener(
+                "mousemove",
+                (event) => {
+
+                    const rect =
+                        card.getBoundingClientRect();
+
+
+                    const x =
+                        event.clientX -
+                        rect.left;
+
+
+                    const y =
+                        event.clientY -
+                        rect.top;
+
+
+                    const rotateX =
+                        (
+                            (y /
+                            rect.height)
+                            - .5
+                        ) * -4;
+
+
+                    const rotateY =
+                        (
+                            (x /
+                            rect.width)
+                            - .5
+                        ) * 4;
+
+
+                    card.style.transform =
+                        `
+                        perspective(900px)
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY}deg)
+                        translateY(-5px)
+                        `;
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                () => {
+
+                    card.style.transform =
+                        "";
+
+                }
+            );
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+</html>

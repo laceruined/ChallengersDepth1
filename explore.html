@@ -1,0 +1,3367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Challenger's Depth — Explore</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+/* =========================================================
+   CHALLENGER'S DEPTH
+   EXPLORE PAGE
+   REBUILT VERSION
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+
+    color: white;
+
+    overflow-x: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #65e0ef 0%,
+            #157e9f 8%,
+            #07536f 18%,
+            #033b58 30%,
+            #022a44 43%,
+            #011c31 57%,
+            #010f20 70%,
+            #000814 85%,
+            #000207 100%
+        );
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000814;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #197d9b;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #73f6ff;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 25px 6%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    z-index: 1000;
+
+    background:
+        linear-gradient(
+            rgba(0, 12, 25, .8),
+            rgba(0, 12, 25, .25),
+            transparent
+        );
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        padding .4s ease,
+        background .4s ease;
+}
+
+nav.scrolled {
+    padding-top: 17px;
+    padding-bottom: 17px;
+
+    background:
+        rgba(0, 10, 20, .92);
+}
+
+.logo {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #73f6ff;
+}
+
+.nav-links {
+    display: flex;
+
+    gap: 30px;
+}
+
+.nav-links a {
+    color:
+        rgba(255,255,255,.7);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: #73f6ff;
+}
+
+
+/* =========================================================
+   SURFACE LIGHT
+========================================================= */
+
+.surface-light {
+    position: fixed;
+
+    top: -350px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 1000px;
+
+    height: 750px;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(190,250,255,.25),
+            transparent 65%
+        );
+
+    filter: blur(25px);
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   DEPTH HUD
+========================================================= */
+
+.depth-hud {
+
+    position: fixed;
+
+    left: clamp(18px, 3vw, 42px);
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    z-index: 950;
+
+    pointer-events: none;
+
+    min-width: 125px;
+
+    text-shadow:
+        0 3px 15px rgba(0,0,0,.8);
+}
+
+.depth-small {
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    color:
+        rgba(255,255,255,.55);
+
+    white-space: nowrap;
+}
+
+.depth-number {
+
+    font-size:
+        clamp(28px, 3vw, 40px);
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    margin-top: 8px;
+
+    white-space: nowrap;
+}
+
+.depth-unit {
+
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.42);
+
+    letter-spacing: 3px;
+
+    margin-top: 6px;
+}
+
+.depth-zone-name {
+
+    margin-top: 13px;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    color:
+        rgba(115,246,255,.65);
+
+    max-width: 120px;
+}
+
+
+/* =========================================================
+   DEPTH BAR
+========================================================= */
+
+.depth-bar {
+
+    position: fixed;
+
+    right: clamp(18px, 3vw, 42px);
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 3px;
+
+    height: 260px;
+
+    background:
+        rgba(255,255,255,.13);
+
+    z-index: 950;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.depth-fill {
+
+    width: 100%;
+
+    height: 0%;
+
+    background:
+        linear-gradient(
+            #73f6ff,
+            #147a9a
+        );
+
+    box-shadow:
+        0 0 20px #73f6ff;
+
+    transition:
+        height .15s linear;
+}
+
+
+/* =========================================================
+   SUBMARINE
+========================================================= */
+
+.submarine {
+
+    position: fixed;
+
+    left: 54%;
+
+    top: 58%;
+
+    width:
+        clamp(190px, 24vw, 330px);
+
+    z-index: 55;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        translateY(70px)
+        rotate(-2deg);
+
+    transition:
+        opacity 1s ease,
+        transform 1.2s cubic-bezier(.2,.8,.2,1),
+        filter 1s ease;
+
+    filter:
+        drop-shadow(
+            0 25px 35px
+            rgba(0,0,0,.6)
+        );
+}
+
+.submarine.show {
+
+    opacity: .9;
+
+    transform:
+        translate(-50%, -50%)
+        translateY(0)
+        rotate(-2deg);
+}
+
+.submarine img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   BUBBLES
+========================================================= */
+
+.bubbles {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 30;
+}
+
+.bubble {
+
+    position: absolute;
+
+    bottom: -50px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+
+    border-radius: 50%;
+
+    animation:
+        bubbleRise linear infinite;
+}
+
+.bubble:nth-child(1) {
+
+    left: 8%;
+
+    width: 8px;
+    height: 8px;
+
+    animation-duration: 9s;
+}
+
+.bubble:nth-child(2) {
+
+    left: 20%;
+
+    width: 14px;
+    height: 14px;
+
+    animation-duration: 13s;
+
+    animation-delay: 2s;
+}
+
+.bubble:nth-child(3) {
+
+    left: 35%;
+
+    width: 6px;
+    height: 6px;
+
+    animation-duration: 8s;
+
+    animation-delay: 3s;
+}
+
+.bubble:nth-child(4) {
+
+    left: 51%;
+
+    width: 12px;
+    height: 12px;
+
+    animation-duration: 11s;
+
+    animation-delay: 1s;
+}
+
+.bubble:nth-child(5) {
+
+    left: 67%;
+
+    width: 18px;
+    height: 18px;
+
+    animation-duration: 15s;
+}
+
+.bubble:nth-child(6) {
+
+    left: 84%;
+
+    width: 8px;
+    height: 8px;
+
+    animation-duration: 10s;
+
+    animation-delay: 4s;
+}
+
+@keyframes bubbleRise {
+
+    0% {
+
+        transform:
+            translateY(0)
+            translateX(0);
+
+        opacity: 0;
+    }
+
+    15% {
+
+        opacity: .5;
+    }
+
+    100% {
+
+        transform:
+            translateY(-110vh)
+            translateX(80px);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    z-index: 10;
+
+    padding:
+        100px 25px;
+}
+
+.hero-content {
+
+    max-width: 850px;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.eyebrow {
+
+    color: #73f6ff;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(70px, 13vw, 160px);
+
+    line-height: .82;
+
+    letter-spacing: -8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #a9f6ff 70%,
+            #43c4df
+        );
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+
+    text-shadow:
+        0 20px 70px
+        rgba(0,200,255,.18);
+}
+
+.hero-description {
+
+    max-width: 590px;
+
+    margin:
+        38px auto 0;
+
+    color:
+        rgba(255,255,255,.7);
+
+    line-height: 1.9;
+
+    font-size: 15px;
+}
+
+.scroll-prompt {
+
+    position: absolute;
+
+    bottom: 35px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    color:
+        rgba(255,255,255,.4);
+
+    white-space: nowrap;
+
+    animation:
+        float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    50% {
+
+        transform:
+            translate(-50%, -10px);
+    }
+}
+
+
+/* =========================================================
+   OCEAN
+========================================================= */
+
+.ocean {
+
+    position: relative;
+
+    z-index: 20;
+}
+
+
+/* =========================================================
+   ZONE
+========================================================= */
+
+.zone {
+
+    position: relative;
+
+    min-height: 1050px;
+
+    padding:
+        150px
+        clamp(90px, 10vw, 150px)
+        120px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   ZONE LAYOUT
+
+   TEXT = LEFT
+   CREATURES = RIGHT
+
+   This is the main fix for overlapping.
+========================================================= */
+
+.zone-layout {
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(300px, .72fr);
+
+    gap:
+        clamp(60px, 9vw, 140px);
+
+    align-items: start;
+
+    position: relative;
+
+    z-index: 100;
+}
+
+
+/* =========================================================
+   TEXT COLUMN
+========================================================= */
+
+.zone-content {
+
+    width: 100%;
+
+    max-width: 520px;
+
+    padding:
+        0 0 40px;
+}
+
+.zone-number {
+
+    color: #73f6ff;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 18px;
+}
+
+.zone h2 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(55px, 7vw, 100px);
+
+    line-height: .88;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 35px;
+
+    max-width: 500px;
+}
+
+.zone p {
+
+    color:
+        rgba(255,255,255,.58);
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    max-width: 500px;
+}
+
+
+/* =========================================================
+   CREATURE COLUMN
+
+   Everything stays inside its own lane.
+========================================================= */
+
+.creature-list {
+
+    width: 100%;
+
+    max-width: 360px;
+
+    margin-left: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 48px;
+
+    padding-top: 20px;
+}
+
+
+/* =========================================================
+   CREATURE CARD
+========================================================= */
+
+.creature {
+
+    width: 100%;
+
+    max-width: 330px;
+
+    margin-left: auto;
+
+    opacity: 0;
+
+    transform:
+        translateY(70px)
+        scale(.95);
+
+    transition:
+        opacity .9s ease,
+        transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.creature.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.creature:nth-child(2) {
+    transition-delay: .12s;
+}
+
+.creature:nth-child(3) {
+    transition-delay: .24s;
+}
+
+.creature a {
+
+    color: white;
+
+    text-decoration: none;
+
+    display: block;
+}
+
+.creature-image {
+
+    width: 100%;
+
+    height: 190px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #126079,
+            #00121e
+        );
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.5);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease;
+}
+
+.creature:hover
+.creature-image {
+
+    transform:
+        translateY(-8px)
+        scale(1.025);
+
+    box-shadow:
+        0 40px 90px
+        rgba(0,190,240,.2);
+}
+
+.creature-tag {
+
+    color: #73f6ff;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    margin-top: 14px;
+}
+
+.creature-name {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 27px;
+
+    margin-top: 7px;
+
+    line-height: 1.1;
+}
+
+.creature-info {
+
+    font-size: 11px;
+
+    color:
+        rgba(255,255,255,.48);
+
+    line-height: 1.7;
+
+    margin-top: 8px;
+
+    max-width: 330px;
+}
+
+
+/* =========================================================
+   ZONE BACKGROUNDS
+========================================================= */
+
+.surface-zone {
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(180,250,255,.2),
+            transparent 40%
+        );
+}
+
+.twilight-zone {
+
+    background:
+        radial-gradient(
+            circle at 75% 20%,
+            rgba(50,180,210,.09),
+            transparent 40%
+        );
+}
+
+.midnight-zone {
+
+    background:
+        radial-gradient(
+            circle at 25% 50%,
+            rgba(80,40,130,.08),
+            transparent 40%
+        );
+}
+
+.abyss-zone {
+
+    background:
+        radial-gradient(
+            circle at 70% 50%,
+            rgba(20,70,100,.08),
+            transparent 40%
+        );
+}
+
+.hadal-zone {
+
+    background:
+        linear-gradient(
+            #000914,
+            #000106
+        );
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+.particles {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .4;
+}
+
+.particle {
+
+    position: absolute;
+
+    width: 2px;
+
+    height: 2px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(170,240,255,.6);
+
+    animation:
+        drift 8s ease-in-out infinite;
+}
+
+.particle:nth-child(1) {
+    left: 15%;
+    top: 25%;
+}
+
+.particle:nth-child(2) {
+    left: 25%;
+    top: 70%;
+}
+
+.particle:nth-child(3) {
+    left: 42%;
+    top: 45%;
+}
+
+.particle:nth-child(4) {
+    left: 57%;
+    top: 20%;
+}
+
+.particle:nth-child(5) {
+    left: 75%;
+    top: 65%;
+}
+
+.particle:nth-child(6) {
+    left: 90%;
+    top: 35%;
+}
+
+@keyframes drift {
+
+    50% {
+
+        transform:
+            translate(
+                30px,
+                -40px
+            );
+    }
+}
+
+
+/* =========================================================
+   DIVIDERS
+========================================================= */
+
+.zone-divider {
+
+    height: 180px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding:
+        0 100px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.15),
+            transparent
+        );
+
+    position: relative;
+
+    z-index: 25;
+}
+
+.zone-divider span {
+
+    color:
+        rgba(255,255,255,.25);
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FINAL SECTION
+========================================================= */
+
+.final {
+
+    min-height: 900px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding:
+        120px 25px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(20,80,110,.08),
+            transparent 45%
+        ),
+        #000208;
+}
+
+.final-content {
+
+    max-width: 850px;
+}
+
+.final h2 {
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(60px, 10vw, 130px);
+
+    line-height: .85;
+
+    letter-spacing: -5px;
+}
+
+.final p {
+
+    max-width: 550px;
+
+    margin:
+        35px auto;
+
+    color:
+        rgba(255,255,255,.4);
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        15px 25px;
+
+    margin: 7px;
+
+    border:
+        1px solid
+        rgba(115,246,255,.45);
+
+    border-radius: 100px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    background:
+        rgba(255,255,255,.03);
+
+    backdrop-filter: blur(10px);
+
+    transition: .35s;
+}
+
+.button:hover {
+
+    background:
+        #73f6ff;
+
+    color:
+        #00202d;
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,220,255,.2);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    padding:
+        35px 7%;
+
+    background:
+        #00050a;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color:
+        rgba(255,255,255,.25);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .zone {
+
+        padding-left:
+            clamp(70px, 8vw, 100px);
+
+        padding-right:
+            clamp(70px, 8vw, 100px);
+    }
+
+    .zone-layout {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(260px, .7fr);
+
+        gap: 50px;
+    }
+
+    .creature-list {
+
+        max-width: 290px;
+    }
+
+    .creature {
+
+        max-width: 290px;
+    }
+
+    .creature-image {
+
+        height: 165px;
+    }
+
+    .submarine {
+
+        left: 52%;
+
+        width:
+            clamp(180px, 23vw, 270px);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    /* -----------------------------------------------------
+       NAV
+    ----------------------------------------------------- */
+
+    nav {
+
+        padding:
+            20px 20px;
+    }
+
+    nav.scrolled {
+
+        padding:
+            15px 20px;
+    }
+
+    .nav-links {
+
+        display: none;
+    }
+
+
+    /* -----------------------------------------------------
+       DEPTH DISPLAY
+    ----------------------------------------------------- */
+
+    .depth-hud {
+
+        left: 15px;
+
+        top: auto;
+
+        bottom: 18px;
+
+        transform: none;
+
+        min-width: 100px;
+
+        padding:
+            8px 10px;
+
+        border-radius: 10px;
+
+        background:
+            rgba(0,8,18,.55);
+
+        backdrop-filter:
+            blur(8px);
+    }
+
+    .depth-number {
+
+        font-size: 26px;
+    }
+
+    .depth-zone-name {
+
+        display: none;
+    }
+
+    .depth-bar {
+
+        right: 15px;
+
+        top: auto;
+
+        bottom: 18px;
+
+        transform: none;
+
+        height: 100px;
+    }
+
+
+    /* -----------------------------------------------------
+       SUBMARINE
+    ----------------------------------------------------- */
+
+    .submarine {
+
+        left: 50%;
+
+        top: 42%;
+
+        width: 190px;
+
+        opacity: 0;
+
+    }
+
+    .submarine.show {
+
+        opacity: .45;
+    }
+
+
+    /* -----------------------------------------------------
+       HERO
+    ----------------------------------------------------- */
+
+    .hero {
+
+        min-height: 100vh;
+
+        padding:
+            100px 22px;
+    }
+
+    .hero h1 {
+
+        font-size:
+            clamp(65px, 18vw, 100px);
+
+        letter-spacing:
+            -5px;
+    }
+
+    .hero-description {
+
+        font-size: 14px;
+    }
+
+
+    /* -----------------------------------------------------
+       ZONES
+    ----------------------------------------------------- */
+
+    .zone {
+
+        min-height: auto;
+
+        padding:
+            120px 25px 100px;
+    }
+
+    .zone-layout {
+
+        display: block;
+
+        max-width: 600px;
+
+        margin: 0 auto;
+    }
+
+    .zone-content {
+
+        max-width: 100%;
+
+        padding: 0;
+    }
+
+    .zone h2 {
+
+        font-size:
+            clamp(55px, 16vw, 85px);
+
+        max-width: 100%;
+    }
+
+    .zone p {
+
+        max-width: 100%;
+    }
+
+
+    /* -----------------------------------------------------
+       CREATURES
+    ----------------------------------------------------- */
+
+    .creature-list {
+
+        width: 100%;
+
+        max-width: 500px;
+
+        margin:
+            70px auto 0;
+
+        gap: 55px;
+
+        padding: 0;
+    }
+
+    .creature {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        margin: 0 auto;
+    }
+
+    .creature-image {
+
+        width: 100%;
+
+        height:
+            clamp(190px, 50vw, 260px);
+    }
+
+    .creature-info {
+
+        max-width: 100%;
+
+        font-size: 12px;
+    }
+
+
+    /* -----------------------------------------------------
+       DIVIDERS
+    ----------------------------------------------------- */
+
+    .zone-divider {
+
+        height: 150px;
+
+        padding:
+            0 35px;
+    }
+
+    .zone-divider span {
+
+        font-size: 8px;
+
+        letter-spacing: 3px;
+    }
+
+
+    /* -----------------------------------------------------
+       FINAL
+    ----------------------------------------------------- */
+
+    .final {
+
+        min-height: 750px;
+
+        padding:
+            100px 25px;
+    }
+
+    .final h2 {
+
+        font-size:
+            clamp(55px, 15vw, 90px);
+
+        letter-spacing: -3px;
+    }
+
+
+    /* -----------------------------------------------------
+       FOOTER
+    ----------------------------------------------------- */
+
+    footer {
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        padding:
+            30px 25px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .logo {
+
+        font-size: 11px;
+
+        letter-spacing: 3px;
+    }
+
+    .hero h1 {
+
+        font-size: 64px;
+
+        letter-spacing: -5px;
+    }
+
+    .hero-description {
+
+        font-size: 13px;
+
+        line-height: 1.8;
+    }
+
+    .zone {
+
+        padding:
+            100px 20px 90px;
+    }
+
+    .zone h2 {
+
+        font-size: 56px;
+    }
+
+    .creature-image {
+
+        height: 190px;
+
+        border-radius: 18px;
+    }
+
+    .submarine {
+
+        width: 155px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SURFACE LIGHT
+===================================================== -->
+
+<div class="surface-light"></div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav id="navbar">
+
+    <div class="logo">
+
+        CHALLENGER'S<span>/</span>DEPTH
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">
+            HOME
+        </a>
+
+        <a href="explore.html">
+            EXPLORE
+        </a>
+
+        <a href="discover.html">
+            DISCOVER
+        </a>
+
+        <a href="about.html">
+            ABOUT
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     DEPTH HUD
+===================================================== -->
+
+<div class="depth-hud">
+
+    <div class="depth-small">
+        CURRENT DEPTH
+    </div>
+
+    <div
+        class="depth-number"
+        id="depthNumber">
+
+        0
+
+    </div>
+
+    <div class="depth-unit">
+        METERS
+    </div>
+
+    <div
+        class="depth-zone-name"
+        id="depthZoneName">
+
+        SURFACE
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     DEPTH BAR
+===================================================== -->
+
+<div class="depth-bar">
+
+    <div
+        class="depth-fill"
+        id="depthFill">
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SUBMARINE
+
+     IMPORTANT:
+     Put your transparent submarine PNG
+     in the SAME folder as this HTML file.
+
+     Rename it to:
+
+     R-removebg-preview (3).png
+===================================================== -->
+
+<div
+    class="submarine"
+    id="submarine">
+
+    <img
+        src="R-removebg-preview (3).png"
+        alt="Deep sea exploration submarine">
+
+</div>
+
+
+<!-- =====================================================
+     BUBBLES
+===================================================== -->
+
+<div class="bubbles">
+
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+</div>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+
+            CHALLENGER'S DEPTH /
+            EXPEDITION 01
+
+        </div>
+
+
+        <h1>
+
+            DIVE<br>
+            DOWN.
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            Welcome aboard.
+
+            Scroll downward to take a journey through
+            the different layers of the ocean.
+
+            Meet creatures from the bright surface
+            all the way to the darkness of the deep sea.
+
+        </p>
+
+    </div>
+
+
+    <div class="scroll-prompt">
+
+        SCROLL TO BEGIN THE DIVE ↓
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     OCEAN
+===================================================== -->
+
+<main class="ocean">
+
+
+<!-- =====================================================
+     SURFACE ZONE
+     0 — 200 METERS
+===================================================== -->
+
+<section
+    class="zone surface-zone"
+    data-depth-start="0"
+    data-depth-end="200"
+    data-zone-name="SURFACE">
+
+    <div class="particles">
+
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+    </div>
+
+
+    <div class="zone-layout">
+
+
+        <!-- TEXT -->
+
+        <div class="zone-content">
+
+            <div class="zone-number">
+
+                00 — 200 METERS
+
+            </div>
+
+
+            <h2>
+
+                The<br>
+                Sunlit<br>
+                Ocean
+
+            </h2>
+
+
+            <p>
+
+                The journey begins in the part of the ocean
+                that receives sunlight.
+
+                This is where enormous whales travel,
+                sea turtles migrate, coral reefs grow,
+                and countless fish search for food.
+
+                Look around carefully.
+
+                The ocean is already full of life.
+
+            </p>
+
+        </div>
+
+
+        <!-- ANIMALS -->
+
+        <div class="creature-list">
+
+
+            <!-- ORCA -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Orca"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://a-z-animals.com/media/killer-whale-1.jpg"
+                        alt="Orca">
+
+                    <div class="creature-tag">
+                        SPECIES 001
+                    </div>
+
+                    <div class="creature-name">
+                        Orca
+                    </div>
+
+                    <div class="creature-info">
+
+                        Orcas, also known as killer whales,
+                        are toothed whales and the largest
+                        members of the oceanic dolphin family.
+
+                        They are apex predators with diverse
+                        diets and highly sophisticated hunting
+                        techniques.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- SEA LION -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Sea_lion"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://ugc.naturalatlas.com/photos/0/149/827/149827/yKc4n7qo/2400.jpg?1627023751"
+                        alt="Sea lion">
+
+                    <div class="creature-tag">
+                        SPECIES 002
+                    </div>
+
+                    <div class="creature-name">
+                        Sea Lion
+                    </div>
+
+                    <div class="creature-info">
+
+                        Sea lions are aquatic mammals with
+                        external ear flaps, long foreflippers,
+                        short hair, and powerful bodies.
+
+                        They live throughout much of the
+                        world's oceans.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- GREEN SEA TURTLE -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Green_sea_turtle"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Green_sea_turtle_%28Chelonia_mydas%29_Moorea.jpg/1280px-Green_sea_turtle_%28Chelonia_mydas%29_Moorea.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+                        alt="Green sea turtle">
+
+                    <div class="creature-tag">
+                        SPECIES 003
+                    </div>
+
+                    <div class="creature-name">
+                        Green Sea Turtle
+                    </div>
+
+                    <div class="creature-info">
+
+                        Green sea turtles are large migratory
+                        marine reptiles found in tropical and
+                        subtropical waters worldwide.
+
+                        Adults feed mainly on seagrass and algae.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DIVIDER
+===================================================== -->
+
+<div class="zone-divider">
+
+    <span>
+
+        200M — LIGHT BEGINS TO FADE ↓
+
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     TWILIGHT ZONE
+     200 — 1,000 METERS
+===================================================== -->
+
+<section
+    class="zone twilight-zone"
+    data-depth-start="200"
+    data-depth-end="1000"
+    data-zone-name="TWILIGHT ZONE">
+
+    <div class="particles">
+
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+    </div>
+
+
+    <div class="zone-layout">
+
+
+        <!-- TEXT -->
+
+        <div class="zone-content">
+
+            <div class="zone-number">
+
+                200 — 1,000 METERS
+
+            </div>
+
+
+            <h2>
+
+                The<br>
+                Twilight<br>
+                Zone
+
+            </h2>
+
+
+            <p>
+
+                Sunlight becomes weaker here.
+
+                The blue of the surface slowly disappears.
+
+                Many creatures living in this region have
+                developed incredible adaptations.
+
+                Some migrate hundreds of meters every day.
+
+                Others use camouflage.
+
+                Some create their own light.
+
+            </p>
+
+        </div>
+
+
+        <!-- ANIMALS -->
+
+        <div class="creature-list">
+
+
+            <!-- BARRELEYE -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Barreleye"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://oceanconservancy.org/wp-content/uploads/2023/04/Macropinna_microstoma_01-web.webp"
+                        alt="Barreleye fish">
+
+                    <div class="creature-tag">
+                        SPECIES 004
+                    </div>
+
+                    <div class="creature-name">
+                        Barreleye Fish
+                    </div>
+
+                    <div class="creature-info">
+
+                        Barreleye fish have tubular,
+                        barrel-shaped eyes that can point
+                        upward to detect silhouettes of prey.
+
+                        Their transparent head makes them
+                        one of the strangest fish in the ocean.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- OCTOPUS -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Giant_Pacific_octopus"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://images.squarespace-cdn.com/content/v1/5bc75d83e4afe931ade4f0d8/a6c5e4c1-7492-447e-b313-5d6ef7c4fbc7/octopus+2.png"
+                        alt="Octopus">
+
+                    <div class="creature-tag">
+                        SPECIES 005
+                    </div>
+
+                    <div class="creature-name">
+                        Octopus
+                    </div>
+
+                    <div class="creature-info">
+
+                        Octopuses are masters of camouflage
+                        and are known for remarkable intelligence,
+                        problem-solving abilities, and complex
+                        behavior.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- SEAHORSE -->
+
+            <div class="creature">
+
+                <a
+                    href="discover.html#seahorse">
+
+                    <img
+                        class="creature-image"
+                        src="images/seahorse.jpg"
+                        alt="Seahorse">
+
+                    <div class="creature-tag">
+                        SPECIES 006
+                    </div>
+
+                    <div class="creature-name">
+                        Seahorse
+                    </div>
+
+                    <div class="creature-info">
+
+                        Seahorses are unusual fish with upright
+                        bodies, curled tails, and independently
+                        moving eyes.
+
+                        In many species, males carry developing
+                        young.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DIVIDER
+===================================================== -->
+
+<div class="zone-divider">
+
+    <span>
+
+        1,000M — SUNLIGHT DISAPPEARS COMPLETELY
+
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     MIDNIGHT ZONE
+     1,000 — 4,000 METERS
+===================================================== -->
+
+<section
+    class="zone midnight-zone"
+    data-depth-start="1000"
+    data-depth-end="4000"
+    data-zone-name="MIDNIGHT ZONE">
+
+    <div class="particles">
+
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+    </div>
+
+
+    <div class="zone-layout">
+
+
+        <!-- TEXT -->
+
+        <div class="zone-content">
+
+            <div class="zone-number">
+
+                1,000 — 4,000 METERS
+
+            </div>
+
+
+            <h2>
+
+                The<br>
+                Midnight<br>
+                Zone
+
+            </h2>
+
+
+            <p>
+
+                There is no sunlight here.
+
+                Plants cannot use photosynthesis.
+
+                The ocean becomes almost completely dark.
+
+                Yet this is one of the most fascinating
+                environments on Earth.
+
+                Many animals produce their own light.
+
+                This phenomenon is called
+                bioluminescence.
+
+            </p>
+
+        </div>
+
+
+        <!-- ANIMALS -->
+
+        <div class="creature-list">
+
+
+            <!-- FACELESS FISH -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Faceless_cusk"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLh6PUhSl_2sXmDWa07lS3iGK3S65I8TN30wGcIhTTkhGeUKx3DrzXBlk&s=10g"
+                        alt="Faceless fish">
+
+                    <div class="creature-tag">
+                        SPECIES 007
+                    </div>
+
+                    <div class="creature-name">
+                        Faceless Fish
+                    </div>
+
+                    <div class="creature-info">
+
+                        The faceless cusk is a deep-sea
+                        cusk-eel that can live thousands of
+                        meters below the surface.
+
+                        Its strange appearance comes from
+                        the unusual position of its mouth
+                        and eyes.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- ANGLERFISH -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Anglerfish"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkrcA8yXf8OfhJU_0AU3GNd57Tx-rooiM0U91JPofA3fR-k55NgqC6M3o&s=10"
+                        alt="Angler fish">
+
+                    <div class="creature-tag">
+                        SPECIES 008
+                    </div>
+
+                    <div class="creature-name">
+                        Angler Fish
+                    </div>
+
+                    <div class="creature-info">
+
+                        Anglerfish are famous deep-sea predators
+                        that use a glowing lure to attract prey.
+
+                        Their bioluminescent lure is one of the
+                        most recognizable adaptations in the
+                        deep ocean.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- ABYSSAL SPIDERFISH -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Abyssal_spiderfish"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://i.pinimg.com/originals/74/b0/f1/74b0f134461c400734d08e99fd93b4f7.jpg"
+                        alt="Abyssal spiderfish">
+
+                    <div class="creature-tag">
+                        SPECIES 009
+                    </div>
+
+                    <div class="creature-name">
+                        Abyssal Spiderfish
+                    </div>
+
+                    <div class="creature-info">
+
+                        The abyssal spiderfish uses long,
+                        specialized fin rays to stand above
+                        the ocean floor like a tripod.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DIVIDER
+===================================================== -->
+
+<div class="zone-divider">
+
+    <span>
+
+        4,000M — ENTERING THE ABYSS ↓
+
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     ABYSSAL ZONE
+     4,000 — 6,000 METERS
+===================================================== -->
+
+<section
+    class="zone abyss-zone"
+    data-depth-start="4000"
+    data-depth-end="6000"
+    data-zone-name="ABYSSAL ZONE">
+
+    <div class="particles">
+
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+    </div>
+
+
+    <div class="zone-layout">
+
+
+        <!-- TEXT -->
+
+        <div class="zone-content">
+
+            <div class="zone-number">
+
+                4,000 — 6,000 METERS
+
+            </div>
+
+
+            <h2>
+
+                The<br>
+                Abyss
+
+            </h2>
+
+
+            <p>
+
+                Welcome to one of Earth's harshest
+                environments.
+
+                Temperatures are close to freezing.
+
+                Pressure is enormous.
+
+                Food is scarce.
+
+                And yet life survives.
+
+                Animals here have evolved to survive
+                conditions that would be impossible
+                for humans without a specialized vehicle.
+
+            </p>
+
+        </div>
+
+
+        <!-- ANIMALS -->
+
+        <div class="creature-list">
+
+
+            <!-- GRENADIER -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Grenadiers_(fish)"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://tse4.mm.bing.net/th/id/OIP.6p6avQ_jn82j0_8e70-L0gHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Grenadier fish">
+
+                    <div class="creature-tag">
+                        SPECIES 010
+                    </div>
+
+                    <div class="creature-name">
+                        Grenadiers
+                    </div>
+
+                    <div class="creature-info">
+
+                        Grenadiers, also known as rattails,
+                        are deep-sea fish found from the
+                        Arctic to Antarctic.
+
+                        They are among the most abundant
+                        deep-sea fish families.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- COMB JELLY -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Ctenophora"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Comb_jelly.jpg/960px-Comb_jelly.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+                        alt="Comb jelly">
+
+                    <div class="creature-tag">
+                        SPECIES 011
+                    </div>
+
+                    <div class="creature-name">
+                        Comb Jelly
+                    </div>
+
+                    <div class="creature-info">
+
+                        Comb jellies are marine invertebrates
+                        that move using rows of tiny cilia.
+
+                        Their bodies can produce beautiful
+                        rainbow-like displays as light
+                        scatters through the cilia.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DIVIDER
+===================================================== -->
+
+<div class="zone-divider">
+
+    <span>
+
+        6,000M — THE HADAL ZONE
+
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     HADAL ZONE
+     6,000 — 11,000 METERS
+===================================================== -->
+
+<section
+    class="zone hadal-zone"
+    data-depth-start="6000"
+    data-depth-end="11000"
+    data-zone-name="HADAL ZONE">
+
+    <div class="particles">
+
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+    </div>
+
+
+    <div class="zone-layout">
+
+
+        <!-- TEXT -->
+
+        <div class="zone-content">
+
+            <div class="zone-number">
+
+                6,000 METERS AND BELOW
+
+            </div>
+
+
+            <h2>
+
+                The<br>
+                Hadal<br>
+                Zone
+
+            </h2>
+
+
+            <p>
+
+                You have reached the deepest region of
+                the ocean.
+
+                The name comes from Hades, the ancient
+                Greek god of the underworld.
+
+                These depths are found inside deep ocean
+                trenches.
+
+                One of the most famous is the
+                Mariana Trench.
+
+                At its deepest point lies Challenger Deep.
+
+            </p>
+
+        </div>
+
+
+        <!-- ANIMALS -->
+
+        <div class="creature-list">
+
+
+            <!-- HADAL SNAILFISH -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Pseudoliparis_amblystomopsis"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://th.bing.com/th/id/OIP.KHFW1vyUt4hioCieBlSaxQHaEK?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Hadal snailfish">
+
+                    <div class="creature-tag">
+                        SPECIES 012
+                    </div>
+
+                    <div class="creature-name">
+                        Hadal Snailfish
+                    </div>
+
+                    <div class="creature-info">
+
+                        Hadal snailfish are gelatinous deep-sea
+                        fish adapted to the crushing pressure
+                        of ocean trenches.
+
+                        Some species live at depths exceeding
+                        8,000 meters.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- CUSK EEL -->
+
+            <div class="creature">
+
+                <a
+                    href="https://en.wikipedia.org/wiki/Cusk-eel"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        class="creature-image"
+                        src="https://tse2.mm.bing.net/th/id/OIP.jrHghfYEdZJ_oBkH8uFsNQHaFO?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Cusk eel">
+
+                    <div class="creature-tag">
+                        SPECIES 013
+                    </div>
+
+                    <div class="creature-name">
+                        Cusk Eel
+                    </div>
+
+                    <div class="creature-info">
+
+                        Cusk eels are marine bony fish
+                        that include species adapted to
+                        extremely deep environments.
+
+                        Some members of the group can grow
+                        to impressive lengths.
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
+
+<section class="final">
+
+    <div class="final-content">
+
+        <div class="eyebrow">
+
+            END OF EXPEDITION
+
+        </div>
+
+
+        <h2>
+
+            You reached<br>
+            the deep.
+
+        </h2>
+
+
+        <p>
+
+            But this is only the beginning.
+
+            Scientists have explored only a small fraction
+            of the world's oceans.
+
+            There are still creatures, ecosystems,
+            shipwrecks, trenches, and geological mysteries
+            waiting to be discovered.
+
+        </p>
+
+
+        <a
+            class="button"
+            href="discover.html">
+
+            DISCOVER OCEAN FACTS →
+
+        </a>
+
+
+        <a
+            class="button"
+            href="about.html">
+
+            EXPLORE CHALLENGER DEEP →
+
+        </a>
+
+
+        <a
+            class="button"
+            href="index.html">
+
+            RETURN HOME →
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <span>
+
+        CHALLENGER'S / DEPTH
+
+    </span>
+
+    <span>
+
+        DISCOVER • PROTECT • EXPLORE
+
+    </span>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const depthNumber =
+    document.getElementById("depthNumber");
+
+const depthFill =
+    document.getElementById("depthFill");
+
+const depthZoneName =
+    document.getElementById("depthZoneName");
+
+const submarine =
+    document.getElementById("submarine");
+
+const navbar =
+    document.getElementById("navbar");
+
+const hero =
+    document.querySelector(".hero");
+
+const zones =
+    document.querySelectorAll(".zone");
+
+const creatures =
+    document.querySelectorAll(".creature");
+
+
+/* =========================================================
+   REAL OCEAN DEPTHS
+========================================================= */
+
+/*
+    These are the actual depth ranges used by the page.
+
+    SURFACE
+    0 — 200m
+
+    TWILIGHT
+    200 — 1,000m
+
+    MIDNIGHT
+    1,000 — 4,000m
+
+    ABYSS
+    4,000 — 6,000m
+
+    HADAL
+    6,000 — 11,000m
+*/
+
+const MAX_DEPTH = 11000;
+
+
+/* =========================================================
+   CLAMP
+========================================================= */
+
+function clamp(value, min, max) {
+
+    return Math.max(
+        min,
+        Math.min(
+            max,
+            value
+        )
+    );
+
+}
+
+
+/* =========================================================
+   GET CURRENT DEPTH
+========================================================= */
+
+function calculateDepth() {
+
+    /*
+       We use the CENTER of the screen.
+
+       This means the depth corresponds to
+       the zone the visitor is actually looking at,
+       rather than the total webpage length.
+    */
+
+    const screenCenter =
+        window.innerHeight / 2;
+
+
+    let currentDepth = 0;
+
+    let currentZone = "SURFACE";
+
+
+    /*
+       Before the first zone
+    */
+
+    if (
+        zones.length === 0
+    ) {
+
+        return {
+            depth: 0,
+            zone: "SURFACE"
+        };
+
+    }
+
+
+    /*
+       Check each actual ocean zone.
+    */
+
+    for (
+        let i = 0;
+        i < zones.length;
+        i++
+    ) {
+
+        const zone =
+            zones[i];
+
+        const rect =
+            zone.getBoundingClientRect();
+
+
+        const startDepth =
+            Number(
+                zone.dataset.depthStart
+            );
+
+
+        const endDepth =
+            Number(
+                zone.dataset.depthEnd
+            );
+
+
+        /*
+           The screen center is inside
+           this zone.
+        */
+
+        if (
+            screenCenter >= rect.top &&
+            screenCenter <= rect.bottom
+        ) {
+
+            const zoneHeight =
+                rect.height;
+
+
+            const distanceIntoZone =
+                screenCenter -
+                rect.top;
+
+
+            let progress =
+                distanceIntoZone /
+                zoneHeight;
+
+
+            progress =
+                clamp(
+                    progress,
+                    0,
+                    1
+                );
+
+
+            currentDepth =
+                startDepth +
+                (
+                    endDepth -
+                    startDepth
+                ) *
+                progress;
+
+
+            currentZone =
+                zone.dataset.zoneName;
+
+            break;
+
+        }
+
+
+        /*
+           If the screen center is above
+           this zone, we haven't reached it yet.
+        */
+
+        if (
+            screenCenter <
+            rect.top
+        ) {
+
+            currentDepth =
+                startDepth;
+
+            currentZone =
+                i === 0
+                    ? "SURFACE"
+                    : zones[i - 1]
+                        .dataset
+                        .zoneName;
+
+            break;
+
+        }
+
+
+        /*
+           If we're below the zone,
+           use its ending depth until
+           the next zone begins.
+        */
+
+        if (
+            screenCenter >
+            rect.bottom
+        ) {
+
+            currentDepth =
+                endDepth;
+
+            currentZone =
+                zone.dataset.zoneName;
+
+        }
+
+    }
+
+
+    return {
+
+        depth:
+            clamp(
+                currentDepth,
+                0,
+                MAX_DEPTH
+            ),
+
+        zone:
+            currentZone
+
+    };
+
+}
+
+
+/* =========================================================
+   UPDATE DEPTH DISPLAY
+========================================================= */
+
+function updateDepth() {
+
+    const result =
+        calculateDepth();
+
+
+    const roundedDepth =
+        Math.round(
+            result.depth
+        );
+
+
+    depthNumber.textContent =
+        roundedDepth.toLocaleString();
+
+
+    depthZoneName.textContent =
+        result.zone;
+
+
+    /*
+       The bar represents the actual
+       0 — 11,000m journey.
+    */
+
+    const percentage =
+        (
+            result.depth /
+            MAX_DEPTH
+        ) * 100;
+
+
+    depthFill.style.height =
+        clamp(
+            percentage,
+            0,
+            100
+        ) + "%";
+
+}
+
+
+/* =========================================================
+   SUBMARINE
+========================================================= */
+
+function updateSubmarine() {
+
+    /*
+       The submarine appears only after
+       the visitor has started leaving
+       the opening screen.
+    */
+
+    const heroRect =
+        hero.getBoundingClientRect();
+
+
+    if (
+        heroRect.bottom <
+        window.innerHeight * .72
+    ) {
+
+        submarine.classList.add(
+            "show"
+        );
+
+    } else {
+
+        submarine.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    /*
+       Make the submarine gradually darker
+       as the expedition goes deeper.
+    */
+
+    const depth =
+        calculateDepth().depth;
+
+
+    const darkness =
+        depth /
+        MAX_DEPTH *
+        .35;
+
+
+    submarine.style.filter =
+        `
+        drop-shadow(
+            0 25px 35px
+            rgba(0,0,0,.65)
+        )
+        brightness(${1 - darkness})
+        `;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function updateNavigation() {
+
+    if (
+        window.scrollY >
+        80
+    ) {
+
+        navbar.classList.add(
+            "scrolled"
+        );
+
+    } else {
+
+        navbar.classList.remove(
+            "scrolled"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CREATURE REVEAL
+========================================================= */
+
+function updateCreatures() {
+
+    creatures.forEach(
+        creature => {
+
+            const rect =
+                creature.getBoundingClientRect();
+
+
+            /*
+               Reveal an animal shortly
+               before it enters the screen.
+            */
+
+            if (
+                rect.top <
+                window.innerHeight * .9
+                &&
+                rect.bottom >
+                0
+            ) {
+
+                creature.classList.add(
+                    "visible"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   COMBINED UPDATE
+========================================================= */
+
+function updatePage() {
+
+    updateDepth();
+
+    updateSubmarine();
+
+    updateNavigation();
+
+    updateCreatures();
+
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    updatePage,
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    updatePage
+);
+
+
+/* =========================================================
+   MOUSE MOVEMENT
+========================================================= */
+
+document.addEventListener(
+    "mousemove",
+    function(event) {
+
+        /*
+           Very small movement keeps
+           the submarine feeling alive
+           without moving it over the text.
+        */
+
+        const x =
+            event.clientX /
+            window.innerWidth
+            - .5;
+
+
+        const y =
+            event.clientY /
+            window.innerHeight
+            - .5;
+
+
+        submarine.style.marginLeft =
+            (x * 8) + "px";
+
+
+        submarine.style.marginTop =
+            (y * 5) + "px";
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updatePage();
+
+
+</script>
+
+
+</body>
+
+</html>

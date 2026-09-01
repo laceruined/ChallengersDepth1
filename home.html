@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Challenger's Depth</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600&display=swap');
+
+:root {
+  --cyan: #73f6ff;
+  --blue: #087ea4;
+  --deep: #010b17;
+  --glass: rgba(255,255,255,.07);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: var(--deep);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* =====================
+   CURSOR GLOW
+===================== */
+
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(75, 230, 255, .12),
+    transparent 65%
+  );
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* =====================
+   HERO
+===================== */
+
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(32, 194, 230, .2),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #063d59 0%,
+      #02283f 35%,
+      #011421 70%,
+      #00070d 100%
+    );
+}
+
+/* underwater light */
+
+.sunlight {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  top: -500px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: conic-gradient(
+    from 180deg,
+    transparent,
+    rgba(123,241,255,.12),
+    transparent 20%,
+    rgba(123,241,255,.08),
+    transparent 40%
+  );
+
+  filter: blur(20px);
+  animation: sunlight 8s ease-in-out infinite alternate;
+}
+
+@keyframes sunlight {
+  from { transform: translateX(-50%) rotate(-4deg); }
+  to { transform: translateX(-50%) rotate(4deg); }
+}
+
+/* =====================
+   NAV
+===================== */
+
+nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 28px 6%;
+   background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(32, 194, 230, .2),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #063d59 0%,
+      #02283f 20%,
+      #011421 70%,
+      #00070d 100%
+    );
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 5;
+}
+
+.logo {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.logo span {
+  color: var(--cyan);
+}
+
+nav a {
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  margin-left: 30px;
+  font-size: 13px;
+  transition: .3s;
+}
+
+nav a:hover {
+  color: var(--cyan);
+}
+
+/* =====================
+   HERO CONTENT
+===================== */
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 22px;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(65px, 11vw, 150px);
+  line-height: .85;
+  letter-spacing: -7px;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff,
+    #8eeeff 75%,
+    #4dc8e2
+  );
+
+  -webkit-background-clip: text;
+  color: transparent;
+
+  text-shadow: 0 15px 50px rgba(0,200,255,.15);
+}
+
+.hero-description {
+  max-width: 580px;
+  margin-top: 30px;
+
+  color: #b6dce7;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* =====================
+   BUTTON
+===================== */
+
+.explore {
+  margin-top: 35px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 15px 25px;
+
+  border: 1px solid rgba(115,246,255,.5);
+  border-radius: 100px;
+
+  color: white;
+  text-decoration: none;
+
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(10px);
+
+  transition: .35s;
+}
+
+.explore:hover {
+  background: var(--cyan);
+  color: #00202d;
+  transform: translateY(-4px);
+  box-shadow: 0 15px 50px rgba(0,220,255,.25);
+}
+
+/* =====================
+   BUBBLES
+===================== */
+
+.bubbles span {
+  position: absolute;
+  bottom: -50px;
+
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+
+  animation: rise linear infinite;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: .5;
+  }
+
+  100% {
+    transform: translateY(-110vh) translateX(40px);
+    opacity: 0;
+  }
+}
+
+.bubbles span:nth-child(1) {
+  left: 10%;
+  width: 8px;
+  height: 8px;
+  animation-duration: 12s;
+}
+
+.bubbles span:nth-child(2) {
+  left: 25%;
+  width: 14px;
+  height: 14px;
+  animation-duration: 16s;
+  animation-delay: 3s;
+}
+
+.bubbles span:nth-child(3) {
+  left: 42%;
+  width: 6px;
+  height: 6px;
+  animation-duration: 10s;
+  animation-delay: 2s;
+}
+
+.bubbles span:nth-child(4) {
+  left: 67%;
+  width: 18px;
+  height: 18px;
+  animation-duration: 18s;
+  animation-delay: 5s;
+}
+
+.bubbles span:nth-child(5) {
+  left: 85%;
+  width: 9px;
+  height: 9px;
+  animation-duration: 13s;
+  animation-delay: 1s;
+}
+
+/* =====================
+   SCROLL
+===================== */
+
+.scroll {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,.45);
+
+  animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+  50% { transform: translate(-50%, -8px); }
+}
+
+/* =====================
+   DISCOVERY
+===================== */
+
+.discovery {
+  padding: 130px 7%;
+  background:
+    radial-gradient(circle at 20% 20%, #063c50, transparent 30%),
+    #010b15;
+}
+
+.section-top {
+  max-width: 700px;
+  margin-bottom: 60px;
+}
+
+.section-top h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(45px, 6vw, 80px);
+  margin: 12px 0;
+}
+
+.section-top p {
+  color: #7ea9b6;
+  line-height: 1.8;
+}
+
+/* =====================
+   CREATURE CARDS
+===================== */
+
+.creatures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.creature {
+  height: 470px;
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 28px;
+
+  background: var(--card-bg);
+  background-size: cover;
+  background-position: center;
+
+  cursor: pointer;
+
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    box-shadow .5s;
+}
+
+.creature::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      transparent 20%,
+      rgba(0,8,15,.15) 40%,
+      rgba(0,5,10,.95)
+    );
+}
+
+.creature:hover {
+  transform: translateY(-12px) scale(1.015);
+  box-shadow: 0 30px 80px rgba(0,180,220,.18);
+}
+
+.creature-content {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  padding: 30px;
+}
+
+.creature-number {
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.creature h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 35px;
+  margin: 10px 0;
+}
+
+.creature p {
+  color: #b1d4dc;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.whale {
+  --card-bg:
+    linear-gradient(135deg, #126079, #00121e);
+}
+
+.turtle {
+  --card-bg:
+    linear-gradient(135deg, #08766f, #00191d);
+}
+
+.jelly {
+  --card-bg:
+    linear-gradient(135deg, #592b78, #070d27);
+}
+
+/* =====================
+   DEPTH
+===================== */
+
+.depth {
+  min-height: 700px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,130,180,.15),
+      transparent 40%
+    ),
+    linear-gradient(#010b15, #000307);
+}
+
+.depth::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 80px,
+      rgba(100,220,255,.025) 81px
+    );
+}
+
+.depth-content {
+  position: relative;
+  z-index: 2;
+}
+
+.depth-number {
+  font-size: clamp(80px, 15vw, 200px);
+  font-weight: 700;
+
+  background: linear-gradient(
+    white,
+    #4ddcff
+  );
+
+  -webkit-background-clip: text;
+  color: transparent;
+
+  letter-spacing: -10px;
+}
+
+.depth-label {
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 12px;
+}
+
+.depth-description {
+  max-width: 500px;
+  margin: 20px auto;
+  color: #668c99;
+  line-height: 1.7;
+}
+
+.stats {
+  margin-top: 60px;
+
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 32px;
+}
+
+.stat span {
+  display: block;
+  margin-top: 5px;
+  color: #577b86;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* =====================
+   FOOTER
+===================== */
+
+footer {
+  padding: 35px 7%;
+  background: #00060b;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #47636c;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+
+@media(max-width: 800px) {
+
+  nav .links {
+    display: none;
+  }
+
+  .creatures {
+    grid-template-columns: 1fr;
+  }
+
+  .creature {
+    height: 400px;
+  }
+
+  .stats {
+    gap: 25px;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor-glow"></div>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+  <div class="sunlight"></div>
+
+  <nav>
+    <div class="logo">CHALLENGER'S<span>/</span>DEPTH</div>
+
+    <div class="links">
+      <a href="discover.html">Discover</a>
+      <a href="explore.html">Explore</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      An expedition beneath the surface
+    </div>
+
+    <h1>
+      CHALLENGER'S<br> DEPTH
+    </h1>
+
+    <p class="hero-description">
+      Enter a world hidden beneath the waves.
+      Discover ancient creatures, mysterious ecosystems,
+      and the extraordinary depths of our blue planet.
+    </p>
+
+    <a class="explore" href="#discover">
+      Start exploring
+      <span>→</span>
+    </a>
+
+  </div>
+
+  <div class="scroll">
+    SCROLL TO DIVE ↓
+  </div>
+
+</section>
+
+
+<!-- ================= DISCOVERY ================= -->
+
+<section class="discovery" id="discover">
+
+  <div class="section-top">
+
+    <div class="eyebrow">
+      01 / Marine Life
+    </div>
+
+    <h2>
+      Life beyond<br>
+      the surface.
+    </h2>
+
+    <p>
+      The ocean is a universe of its own. Meet some of the
+      extraordinary creatures that call it home.
+    </p>
+
+  </div>
+
+
+  <div class="creatures">
+
+    <div class="creature whale">
+
+      <div class="creature-content">
+
+        <div class="creature-number">
+          SPECIES 001
+        </div>
+
+        <h3>Blue Whale</h3>
+
+        <p>
+          The largest animal ever known to exist.
+          Its heartbeat can be heard from several meters away.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="creature turtle">
+
+      <div class="creature-content">
+
+        <div class="creature-number">
+          SPECIES 002
+        </div>
+
+        <h3>Sea Turtle</h3>
+
+        <p>
+          Ancient navigators of the ocean,
+          traveling thousands of kilometers across open water.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="creature jelly">
+
+      <div class="creature-content">
+
+        <div class="creature-number">
+          SPECIES 003
+        </div>
+
+        <h3>Jellyfish</h3>
+
+        <p>
+          Translucent drifters that have existed
+          in Earth's oceans for hundreds of millions of years.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= DEPTH ================= -->
+
+<section class="depth" id="depth">
+
+  <div class="depth-content">
+
+    <div class="depth-label">
+      The deepest known point
+    </div>
+
+    <div class="depth-number">
+      11,000m
+    </div>
+
+    <p class="depth-description">
+      Challenger Deep lies within the Mariana Trench.
+      At this depth, pressure becomes more than a thousand
+      times greater than at the surface.
+    </p>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong>71%</strong>
+        <span>Earth covered</span>
+      </div>
+
+      <div class="stat">
+        <strong>5</strong>
+        <span>Major oceans</span>
+      </div>
+
+      <div class="stat">
+        <strong>∞</strong>
+        <span>Still unknown</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="about">
+
+  <span>CHALLENGER'S / DEEP</span>
+
+  <span>
+    DISCOVER • PROTECT • EXPLORE
+  </span>
+
+</footer>
+
+
+<script>
+
+/* =====================
+   MOUSE LIGHT
+===================== */
+
+const glow = document.querySelector(".cursor-glow");
+
+document.addEventListener("mousemove", (e) => {
+
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+
+});
+
+
+/* =====================
+   PARALLAX HERO
+===================== */
+
+const sunlight = document.querySelector(".sunlight");
+
+document.addEventListener("mousemove", (e) => {
+
+  const x = (e.clientX / window.innerWidth - .5) * 20;
+  const y = (e.clientY / window.innerHeight - .5) * 20;
+
+  sunlight.style.marginLeft = x + "px";
+  sunlight.style.marginTop = y + "px";
+
+});
+
+
+/* =====================
+   CARD TILT
+===================== */
+
+document.querySelectorAll(".creature").forEach(card => {
+
+  card.addEventListener("mousemove", e => {
+
+    const rect = card.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateX =
+      ((y / rect.height) - .5) * -8;
+
+    const rotateY =
+      ((x / rect.width) - .5) * 8;
+
+    card.style.transform =
+      `perspective(800px)
+       rotateX(${rotateX}deg)
+       rotateY(${rotateY}deg)
+       scale(1.02)`;
+
+  });
+
+  card.addEventListener("mouseleave", () => {
+
+    card.style.transform =
+      "perspective(800px) rotateX(0) rotateY(0) scale(1)";
+
+  });
+
+});
+
+
+/* =====================
+   DEPTH NUMBER EFFECT
+===================== */
+
+const depthNumber =
+  document.querySelector(".depth-number");
+
+let animated = false;
+
+window.addEventListener("scroll", () => {
+
+  const rect = depthNumber.getBoundingClientRect();
+
+  if (
+    rect.top < window.innerHeight &&
+    rect.bottom > 0 &&
+    !animated
+  ) {
+
+    animated = true;
+
+    let current = 0;
+    const target = 11000;
+
+    const timer = setInterval(() => {
+
+      current += 250;
+
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+
+      depthNumber.textContent =
+        current.toLocaleString() + "m";
+
+    }, 30);
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>

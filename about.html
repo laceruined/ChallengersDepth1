@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title></title>Challenger's Depth</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --cyan: #73f6ff;
+  --blue: #087ea4;
+  --deep: #010812;
+  --dark: #00040a;
+  --glass: rgba(255,255,255,.06);
+  --muted: #7897a3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: var(--deep);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* =========================
+   CURSOR
+========================= */
+
+.cursor-glow {
+  position: fixed;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(75,230,255,.12),
+      transparent 65%
+    );
+
+  transform: translate(-50%, -50%);
+
+  z-index: 100;
+}
+
+/* =========================
+   NAV
+========================= */
+
+nav {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  padding: 25px 6%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 20;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,8,16,.9),
+      transparent
+    );
+
+  backdrop-filter: blur(8px);
+}
+
+.logo {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.logo span {
+  color: var(--cyan);
+}
+
+nav a {
+  color: rgba(255,255,255,.65);
+
+  text-decoration: none;
+
+  margin-left: 28px;
+
+  font-size: 12px;
+
+  transition: .3s;
+}
+
+nav a:hover {
+  color: var(--cyan);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 100vh;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(24,190,225,.2),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #063d59,
+      #02283f 25%,
+      #011421 60%,
+      #00040a
+    );
+}
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 120px,
+      rgba(115,246,255,.018) 121px
+    );
+
+  pointer-events: none;
+}
+
+.sunlight {
+  position: absolute;
+
+  width: 900px;
+  height: 900px;
+
+  top: -600px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  background:
+    conic-gradient(
+      from 180deg,
+      transparent,
+      rgba(123,241,255,.12),
+      transparent 20%,
+      rgba(123,241,255,.08),
+      transparent 40%
+    );
+
+  filter: blur(20px);
+
+  animation:
+    sunlight 8s ease-in-out infinite alternate;
+}
+
+@keyframes sunlight {
+
+  from {
+    transform:
+      translateX(-50%)
+      rotate(-5deg);
+  }
+
+  to {
+    transform:
+      translateX(-50%)
+      rotate(5deg);
+  }
+
+}
+
+.hero-content {
+  position: relative;
+
+  z-index: 3;
+
+  max-width: 1000px;
+
+  padding: 120px 25px 80px;
+}
+
+.eyebrow {
+  color: var(--cyan);
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 5px;
+
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(
+    60px,
+    11vw,
+    150px
+  );
+
+  line-height: .85;
+
+  letter-spacing: -7px;
+
+  background:
+    linear-gradient(
+      180deg,
+      white,
+      #8eeeff 70%,
+      #3dbed8
+    );
+
+  -webkit-background-clip: text;
+
+  color: transparent;
+}
+
+.hero-description {
+  max-width: 650px;
+
+  margin: 35px auto;
+
+  color: #b4d9e4;
+
+  line-height: 1.8;
+
+  font-size: 16px;
+}
+
+.hero-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 15px 25px;
+
+  border-radius: 100px;
+
+  border: 1px solid rgba(115,246,255,.4);
+
+  color: white;
+
+  text-decoration: none;
+
+  background: rgba(255,255,255,.05);
+
+  backdrop-filter: blur(10px);
+
+  transition: .35s;
+}
+
+.hero-button:hover {
+  background: var(--cyan);
+
+  color: #00202d;
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,220,255,.2);
+}
+
+/* =========================
+   BUBBLES
+========================= */
+
+.bubbles span {
+  position: absolute;
+
+  bottom: -40px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.25);
+
+  border-radius: 50%;
+
+  animation:
+    rise linear infinite;
+}
+
+.bubbles span:nth-child(1) {
+  left: 10%;
+  width: 8px;
+  height: 8px;
+  animation-duration: 12s;
+}
+
+.bubbles span:nth-child(2) {
+  left: 25%;
+  width: 14px;
+  height: 14px;
+  animation-duration: 16s;
+  animation-delay: 3s;
+}
+
+.bubbles span:nth-child(3) {
+  left: 42%;
+  width: 6px;
+  height: 6px;
+  animation-duration: 10s;
+  animation-delay: 2s;
+}
+
+.bubbles span:nth-child(4) {
+  left: 67%;
+  width: 18px;
+  height: 18px;
+  animation-duration: 18s;
+  animation-delay: 5s;
+}
+
+.bubbles span:nth-child(5) {
+  left: 85%;
+  width: 9px;
+  height: 9px;
+  animation-duration: 13s;
+}
+
+@keyframes rise {
+
+  0% {
+    transform:
+      translateY(0)
+      translateX(0);
+
+    opacity: 0;
+  }
+
+  10% {
+    opacity: .5;
+  }
+
+  100% {
+    transform:
+      translateY(-110vh)
+      translateX(50px);
+
+    opacity: 0;
+  }
+
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.intro {
+  padding: 140px 7%;
+
+  background:
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(0,150,200,.1),
+      transparent 30%
+    ),
+    #010914;
+}
+
+.intro-grid {
+  max-width: 1200px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    1.1fr .9fr;
+
+  gap: 80px;
+
+  align-items: center;
+}
+
+.intro h2 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(45px, 6vw, 80px);
+
+  line-height: .95;
+
+  letter-spacing: -3px;
+
+  margin-bottom: 30px;
+}
+
+.intro h2 span {
+  color: var(--cyan);
+}
+
+.intro p {
+  color: var(--muted);
+
+  line-height: 1.9;
+
+  margin-bottom: 20px;
+}
+
+.intro-image {
+  height: 500px;
+
+  border-radius: 30px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  background-image:
+    linear-gradient(
+      180deg,
+      transparent 30%,
+      rgba(0,5,10,.8)
+    ),
+    url("https://www.noaa.gov/sites/default/files/styles/landscape_width_650/public/2021-03/ship3224.jpg");
+
+  background-size: cover;
+
+  background-position: center;
+
+  box-shadow:
+    0 30px 100px
+    rgba(0,0,0,.4);
+}
+
+/* =========================
+   DEPTH COUNTER
+========================= */
+
+.depth-section {
+  padding: 140px 7%;
+
+  text-align: center;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,130,180,.15),
+      transparent 45%
+    ),
+    #00050b;
+}
+
+.depth-section h2 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(40px, 6vw, 70px);
+
+  margin-bottom: 20px;
+}
+
+.depth-section > p {
+  max-width: 600px;
+
+  margin: auto;
+
+  color: var(--muted);
+
+  line-height: 1.8;
+}
+
+.depth-number {
+  font-size:
+    clamp(80px, 15vw, 190px);
+
+  font-weight: 700;
+
+  letter-spacing: -10px;
+
+  margin: 30px 0;
+
+  background:
+    linear-gradient(
+      white,
+      var(--cyan)
+    );
+
+  -webkit-background-clip: text;
+
+  color: transparent;
+}
+
+.depth-meter {
+  max-width: 800px;
+
+  height: 14px;
+
+  margin: 50px auto 20px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  overflow: hidden;
+}
+
+.depth-fill {
+  width: 0%;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      #087ea4,
+      #371c62
+    );
+
+  transition:
+    width 1s ease;
+}
+
+.depth-control {
+  width: min(800px, 90%);
+
+  accent-color: var(--cyan);
+}
+
+.depth-labels {
+  max-width: 800px;
+
+  margin: 12px auto;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #577783;
+
+  font-size: 11px;
+}
+
+/* =========================
+   HISTORY
+========================= */
+
+.history {
+  padding: 150px 7%;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      #063c50,
+      transparent 25%
+    ),
+    #010b15;
+}
+
+.history-header {
+  max-width: 750px;
+
+  margin-bottom: 80px;
+}
+
+.history-header h2 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(50px, 7vw, 90px);
+
+  line-height: .9;
+
+  margin: 15px 0;
+}
+
+.history-header p {
+  color: var(--muted);
+
+  line-height: 1.8;
+}
+
+/* timeline */
+
+.timeline {
+  max-width: 1000px;
+
+  margin: auto;
+
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+
+  top: 0;
+  bottom: 0;
+
+  width: 1px;
+
+  background:
+    linear-gradient(
+      transparent,
+      rgba(115,246,255,.35),
+      transparent
+    );
+}
+
+.timeline-item {
+  width: 50%;
+
+  padding: 25px 50px;
+
+  position: relative;
+
+  cursor: pointer;
+}
+
+.timeline-item:nth-child(odd) {
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  margin-left: 50%;
+}
+
+.timeline-dot {
+  position: absolute;
+
+  top: 35px;
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  background: var(--cyan);
+
+  box-shadow:
+    0 0 25px
+    rgba(115,246,255,.7);
+}
+
+.timeline-item:nth-child(odd)
+.timeline-dot {
+  right: -7px;
+}
+
+.timeline-item:nth-child(even)
+.timeline-dot {
+  left: -7px;
+}
+
+.timeline-card {
+  padding: 30px;
+
+  border-radius: 24px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  background:
+    rgba(255,255,255,.035);
+
+  backdrop-filter: blur(10px);
+
+  transition: .35s;
+}
+
+.timeline-card:hover {
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(115,246,255,.25);
+
+  background:
+    rgba(115,246,255,.06);
+}
+
+.timeline-year {
+  color: var(--cyan);
+
+  font-size: 12px;
+
+  letter-spacing: 3px;
+}
+
+.timeline-card h3 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 30px;
+
+  margin: 10px 0;
+}
+
+.timeline-card p {
+  color: #7e9ca6;
+
+  line-height: 1.7;
+
+  font-size: 14px;
+}
+
+.timeline-tag {
+  display: inline-block;
+
+  margin-top: 18px;
+
+  padding: 7px 12px;
+
+  border-radius: 100px;
+
+  background:
+    rgba(115,246,255,.07);
+
+  color: var(--cyan);
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+}
+
+/* =========================
+   PEOPLE
+========================= */
+
+.people {
+  padding: 140px 7%;
+
+  background:
+    linear-gradient(
+      #010914,
+      #00050a
+    );
+}
+
+.people-header {
+  max-width: 700px;
+
+  margin-bottom: 60px;
+}
+
+.people-header h2 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(45px, 6vw, 75px);
+
+  margin: 15px 0;
+}
+
+.people-header p {
+  color: var(--muted);
+
+  line-height: 1.8;
+}
+
+.people-grid {
+  max-width: 1200px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.person {
+  min-height: 300px;
+
+  padding: 25px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius: 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: flex-end;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0),
+      rgba(0,4,8,.95)
+    );
+
+  transition:
+    transform .4s,
+    border-color .4s;
+}
+
+.person::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(115,246,255,.15),
+      transparent 45%
+    );
+}
+
+.person:hover {
+  transform:
+    translateY(-10px);
+
+  border-color:
+    rgba(115,246,255,.25);
+}
+
+.person-content {
+  position: relative;
+  z-index: 2;
+}
+
+.person-year {
+  color: var(--cyan);
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+}
+
+.person h3 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size: 25px;
+
+  margin: 8px 0;
+}
+
+.person p {
+  color: #78949e;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+/* =========================
+   CAMERON FEATURE
+========================= */
+
+.feature {
+  min-height: 700px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  background:
+    #00050a;
+}
+
+.feature-image {
+  min-height: 600px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(0,5,10,.5)
+    ),
+    url("https://media.npr.org/assets/img/2013/05/23/deep-sea2-868e2038cd94129b8fec0344cdcb9054e2724654.jpg");
+
+  background-size: cover;
+
+  background-position: center;
+}
+
+.feature-content {
+  padding: 100px 8%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.feature-content h2 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(45px, 6vw, 80px);
+
+  line-height: .95;
+
+  margin: 15px 0 25px;
+}
+
+.feature-content p {
+  color: var(--muted);
+
+  line-height: 1.8;
+
+  max-width: 550px;
+
+  margin-bottom: 18px;
+}
+
+.feature-number {
+  font-size: 11px;
+
+  letter-spacing: 4px;
+
+  color: var(--cyan);
+}
+
+/* =========================
+   PRESSURE
+========================= */
+
+.pressure {
+  padding: 150px 7%;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(70,20,130,.15),
+      transparent 40%
+    ),
+    #01040a;
+}
+
+.pressure h2 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(45px, 6vw, 80px);
+
+  margin-bottom: 20px;
+}
+
+.pressure-intro {
+  max-width: 600px;
+
+  margin: auto;
+
+  color: var(--muted);
+
+  line-height: 1.8;
+}
+
+.pressure-display {
+  max-width: 900px;
+
+  margin: 70px auto 0;
+
+  padding: 60px 30px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(115,246,255,.04),
+      rgba(70,20,130,.05)
+    );
+}
+
+.pressure-value {
+  font-size:
+    clamp(50px, 9vw, 110px);
+
+  font-weight: 700;
+
+  color: white;
+
+  letter-spacing: -5px;
+}
+
+.pressure-unit {
+  color: var(--cyan);
+
+  letter-spacing: 4px;
+
+  font-size: 11px;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+  min-height: 550px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 80px 20px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,170,220,.18),
+      transparent 40%
+    ),
+    #010812;
+}
+
+.cta h2 {
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(50px, 8vw, 100px);
+
+  line-height: .9;
+
+  margin-bottom: 30px;
+}
+
+.cta p {
+  color: var(--muted);
+
+  max-width: 550px;
+
+  margin: auto auto 30px;
+
+  line-height: 1.8;
+}
+
+.cta a {
+  display: inline-flex;
+
+  padding: 15px 25px;
+
+  border-radius: 100px;
+
+  background: var(--cyan);
+
+  color: #00202d;
+
+  text-decoration: none;
+
+  font-weight: 700;
+
+  transition: .3s;
+}
+
+.cta a:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,220,255,.25);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 35px 7%;
+
+  background: #000307;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #47636c;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+}
+
+/* =========================
+   REVEAL ANIMATION
+========================= */
+
+.reveal {
+  opacity: 0;
+
+  transform:
+    translateY(40px);
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 900px) {
+
+  nav .links {
+    display: none;
+  }
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-image {
+    height: 400px;
+  }
+
+  .people-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .feature {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-image {
+    min-height: 450px;
+  }
+
+}
+
+@media(max-width: 650px) {
+
+  .timeline::before {
+    left: 10px;
+  }
+
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    width: 100%;
+
+    margin-left: 0;
+
+    padding-left: 40px;
+
+    text-align: left;
+  }
+
+  .timeline-item:nth-child(odd)
+  .timeline-dot,
+  .timeline-item:nth-child(even)
+  .timeline-dot {
+    left: 3px;
+    right: auto;
+  }
+
+  .people-grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="cursor-glow"></div>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+  <div class="logo">
+    CHALLENGER'S<span>/</span>DEPTH
+  </div>
+
+  <div class="links">
+
+    <a href="home.html">
+      Home
+    </a>
+
+    <a href="discover.html">
+      Discover
+    </a>
+
+    <a href="explore.html">
+      Explore
+    </a>
+
+    <a href="contacts.html">
+      Contacts
+    </a>
+
+  </div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="sunlight"></div>
+
+  <div class="bubbles">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </div>
+
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      03 / The Deep
+    </div>
+
+    <h1>
+      CHALLENGER<br>
+      DEPTH
+    </h1>
+
+    <p class="hero-description">
+
+      Nearly eleven kilometers beneath the Pacific Ocean
+      lies a place so remote that only a small number of
+      humans have ever seen it.
+
+      <br><br>
+
+      This is the story of the deepest known point
+      on Earth — and the people who dared to descend.
+
+    </p>
+
+  
+      Begin the descent
+      <span>↓</span>
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<section class="intro">
+
+  <div class="intro-grid">
+
+    <div class="reveal">
+
+      <div class="eyebrow">
+        Where Earth disappears
+      </div>
+
+      <h2>
+        10,935 meters<br>
+        <span>below the surface.</span>
+      </h2>
+
+      <p>
+
+        Challenger Deep lies within the Mariana Trench
+        in the western Pacific, near Guam.
+
+      </p>
+
+      <p>
+
+        NOAA's current cited estimate places the deepest
+        observed seafloor at approximately 10,935 meters
+        below mean sea level.
+
+      </p>
+
+      <p>
+
+        At that depth there is no sunlight, temperatures
+        hover just above freezing, and the pressure is
+        more than a thousand times the pressure at sea level.
+
+      </p>
+
+    </div>
+
+
+    <div class="intro-image reveal"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     DEPTH INTERACTIVE
+========================= -->
+
+<section
+  class="depth-section"
+  id="depth"
+>
+
+  <div class="eyebrow">
+    Interactive descent
+  </div>
+
+  <h2>
+    Dive into the numbers.
+  </h2>
+
+  <p>
+
+    Drag the slider downward and watch the depth
+    increase from the surface to Challenger Deep.
+
+  </p>
+
+  <div
+    class="depth-number"
+    id="depthNumber"
+  >
+    0m
+  </div>
+
+  <div class="depth-meter">
+
+    <div
+      class="depth-fill"
+      id="depthFill"
+    ></div>
+
+  </div>
+
+  <input
+    class="depth-control"
+    id="depthSlider"
+    type="range"
+    min="0"
+    max="10935"
+    value="0"
+  >
+
+  <div class="depth-labels">
+
+    <span>SURFACE</span>
+
+    <span>CHALLENGER DEPTH</span>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     HISTORY
+========================= -->
+
+<section
+  class="history"
+  id="history"
+>
+
+  <div class="history-header reveal">
+
+    <div class="eyebrow">
+      01 / A history of descent
+    </div>
+
+    <h2>
+      Seven miles down.
+    </h2>
+
+    <p>
+
+      Challenger Deep has been visited by research
+      vehicles, robots and a remarkably small group
+      of human explorers.
+
+      Here are some of the milestones that changed
+      what we know about the deepest ocean.
+
+    </p>
+
+  </div>
+
+
+  <div class="timeline">
+
+
+    <!-- 1875 -->
+
+    <div class="timeline-item reveal">
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-card">
+
+        <div class="timeline-year">
+          1875
+        </div>
+
+        <h3>
+          HMS Challenger
+        </h3>
+
+        <p>
+
+          The expedition of HMS Challenger made some
+          of the first soundings of the Mariana Trench.
+          The deepest region would later become known
+          as Challenger Deep.
+
+        </p>
+
+        <div class="timeline-tag">
+          FIRST SOUNDINGS
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 1960 -->
+
+    <div class="timeline-item reveal">
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-card">
+
+        <div class="timeline-year">
+          1960
+        </div>
+
+        <h3>
+          Trieste
+        </h3>
+
+        <p>
+
+          Jacques Piccard and U.S. Navy Lieutenant
+          Don Walsh descended inside the bathyscaphe
+          Trieste.
+
+          They became the first humans to reach
+          Challenger Deep.
+
+        </p>
+
+        <div class="timeline-tag">
+          FIRST HUMANS
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 1995 -->
+
+    <div class="timeline-item reveal">
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-card">
+
+        <div class="timeline-year">
+          1995
+        </div>
+
+        <h3>
+          Kaiko
+        </h3>
+
+        <p>
+
+          Japan's remotely operated vehicle Kaiko
+          reached Challenger Deep, bringing robotic
+          exploration back to the deepest part of
+          the ocean.
+
+        </p>
+
+        <div class="timeline-tag">
+          ROBOTIC EXPLORATION
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 2009 -->
+
+    <div class="timeline-item reveal">
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-card">
+
+        <div class="timeline-year">
+          2009
+        </div>
+
+        <h3>
+          Nereus
+        </h3>
+
+        <p>
+
+          Woods Hole Oceanographic Institution's
+          hybrid underwater vehicle Nereus reached
+          Challenger Deep and collected observations
+          from the seafloor.
+
+        </p>
+
+        <div class="timeline-tag">
+          HYBRID VEHICLE
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 2012 -->
+
+    <div class="timeline-item reveal">
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-card">
+
+        <div class="timeline-year">
+          2012
+        </div>
+
+        <h3>
+          James Cameron
+        </h3>
+
+        <p>
+
+          Cameron became the first person to make
+          a solo descent to Challenger Deep in
+          the specially designed Deepsea Challenger.
+
+        </p>
+
+        <div class="timeline-tag">
+          SOLO DESCENT
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 2019 -->
+
+    <div class="timeline-item reveal">
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-card">
+
+        <div class="timeline-year">
+          2019
+        </div>
+
+        <h3>
+          Five Deeps
+        </h3>
+
+        <p>
+
+          Victor Vescovo and the Five Deeps team
+          conducted repeated dives using the
+          DSV Limiting Factor.
+
+        </p>
+
+        <div class="timeline-tag">
+          REPEATED DIVES
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 2020 -->
+
+    <div class="timeline-item reveal">
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-card">
+
+        <div class="timeline-year">
+          2020
+        </div>
+
+        <h3>
+          Ring of Fire
+        </h3>
+
+        <p>
+
+          Victor Vescovo and Dr. Kathy Sullivan
+          descended together, while NOAA-supported
+          research gathered pressure and acoustic
+          data from the deepest ocean.
+
+        </p>
+
+        <div class="timeline-tag">
+          SCIENCE + EXPLORATION
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 2021 -->
+
+    <div class="timeline-item reveal">
+
+      <div class="timeline-dot"></div>
+
+      <div class="timeline-card">
+
+        <div class="timeline-year">
+          2021
+        </div>
+
+        <h3>
+          More explorers
+        </h3>
+
+        <p>
+
+          Richard Garriott, Michael Dubno,
+          Hamish Harding and Nicole Yamase
+          were among the passengers taken to
+          Challenger Deep during a new series
+          of dives.
+
+        </p>
+
+        <div class="timeline-tag">
+          NEW GENERATION
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PEOPLE
+========================= -->
+
+<section
+  class="people"
+  id="people"
+>
+
+  <div class="people-header reveal">
+
+    <div class="eyebrow">
+      02 / The people
+    </div>
+
+    <h2>
+      The humans<br>
+      who went down.
+    </h2>
+
+    <p>
+
+      Reaching Challenger Deep requires more than
+      courage. It requires pressure-resistant
+      engineering, navigation, life-support systems,
+      and an enormous team working on the surface.
+
+    </p>
+
+  </div>
+
+
+  <div class="people-grid">
+
+
+    <div class="person reveal">
+
+      <div class="person-content">
+
+        <div class="person-year">
+          1960
+        </div>
+
+        <h3>
+          Jacques Piccard
+        </h3>
+
+        <p>
+          Swiss ocean engineer and explorer.
+          Co-pilot of Trieste during the first
+          human descent.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="person reveal">
+
+      <div class="person-content">
+
+        <div class="person-year">
+          1960
+        </div>
+
+        <h3>
+          Don Walsh
+        </h3>
+
+        <p>
+          U.S. Navy lieutenant and oceanographer.
+          He piloted Trieste alongside Piccard.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="person reveal">
+
+      <div class="person-content">
+
+        <div class="person-year">
+          2012
+        </div>
+
+        <h3>
+          James Cameron
+        </h3>
+
+        <p>
+          Filmmaker and explorer who completed
+          the first solo descent to Challenger Deep.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="person reveal">
+
+      <div class="person-content">
+
+        <div class="person-year">
+          2019+
+        </div>
+
+        <h3>
+          Victor Vescovo
+        </h3>
+
+        <p>
+          Explorer and pilot of Limiting Factor,
+          who made repeated descents and led the
+          Five Deeps expedition.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="person reveal">
+
+      <div class="person-content">
+
+        <div class="person-year">
+          2020
+        </div>
+
+        <h3>
+          Kathy Sullivan
+        </h3>
+
+        <p>
+          Former NASA astronaut and geologist who
+          became the first woman to reach Challenger Deep.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="person reveal">
+
+      <div class="person-content">
+
+        <div class="person-year">
+          2021
+        </div>
+
+        <h3>
+          Richard Garriott
+        </h3>
+
+        <p>
+          Explorer and game-industry pioneer who
+          visited Challenger Deep as a mission specialist.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="person reveal">
+
+      <div class="person-content">
+
+        <div class="person-year">
+          2021
+        </div>
+
+        <h3>
+          Hamish Harding
+        </h3>
+
+        <p>
+          Explorer and aviation entrepreneur who
+          descended with Vescovo in March 2021.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="person reveal">
+
+      <div class="person-content">
+
+        <div class="person-year">
+          2021
+        </div>
+
+        <h3>
+          Nicole Yamase
+        </h3>
+
+        <p>
+          Marine scientist from the Federated States
+          of Micronesia who descended to the western pool.
+        </p>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CAMERON FEATURE
+========================= -->
+
+<section class="feature">
+
+  <div class="feature-image"></div>
+
+
+  <div class="feature-content reveal">
+
+    <div class="feature-number">
+      26 / 03 / 2012
+    </div>
+
+    <h2>
+      Alone at the bottom.
+    </h2>
+
+    <p>
+
+      James Cameron spent years developing the
+      Deepsea Challenger, a specially designed
+      deep-submergence vehicle built for extreme depth.
+
+    </p>
+
+    <p>
+
+      On March 26, 2012, he descended alone into
+      Challenger Deep, becoming the first person
+      to make a solo descent.
+
+    </p>
+
+    <p>
+
+      The expedition brought cameras, sampling
+      equipment and scientific instruments into
+      a part of the ocean that humans had barely
+      seen before.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PRESSURE
+========================= -->
+
+<section class="pressure">
+
+  <div class="eyebrow">
+    Extreme environment
+  </div>
+
+  <h2>
+    Imagine the pressure.
+  </h2>
+
+  <p class="pressure-intro">
+
+    Move your cursor across the panel below.
+    The pressure rises as you descend toward
+    Challenger Deep.
+
+  </p>
+
+
+  <div
+    class="pressure-display"
+    id="pressureDisplay"
+  >
+
+    <div
+      class="pressure-value"
+      id="pressureValue"
+    >
+      1
+    </div>
+
+    <div class="pressure-unit">
+      ATMOSPHERES
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+  <div class="reveal">
+
+    <div class="eyebrow">
+      Keep exploring
+    </div>
+
+    <h2>
+      The ocean<br>
+      isn't finished.
+    </h2>
+
+    <p>
+
+      Challenger Deep reminds us that even on
+      our own planet, enormous worlds remain
+      almost completely unknown.
+
+    </p>
+
+    <a href="home.html">
+      Return to Ocean Explorer →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <span>
+    CHALLENGER'S / DEPTH
+  </span>
+
+  <span>
+    DISCOVER • PROTECT • EXPLORE
+  </span>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   CURSOR GLOW
+========================= */
+
+const glow =
+  document.querySelector(".cursor-glow");
+
+document.addEventListener(
+  "mousemove",
+  e => {
+
+    glow.style.left =
+      e.clientX + "px";
+
+    glow.style.top =
+      e.clientY + "px";
+
+  }
+);
+
+
+/* =========================
+   DEPTH SLIDER
+========================= */
+
+const slider =
+  document.getElementById(
+    "depthSlider"
+  );
+
+const depthNumber =
+  document.getElementById(
+    "depthNumber"
+  );
+
+const depthFill =
+  document.getElementById(
+    "depthFill"
+  );
+
+
+slider.addEventListener(
+  "input",
+  () => {
+
+    const depth =
+      Number(slider.value);
+
+    const percentage =
+      (depth / 10935) * 100;
+
+    depthNumber.textContent =
+      depth.toLocaleString() + "m";
+
+    depthFill.style.width =
+      percentage + "%";
+
+  }
+);
+
+
+/* =========================
+   PRESSURE INTERACTION
+========================= */
+
+const pressureDisplay =
+  document.getElementById(
+    "pressureDisplay"
+  );
+
+const pressureValue =
+  document.getElementById(
+    "pressureValue"
+  );
+
+
+pressureDisplay.addEventListener(
+  "mousemove",
+  e => {
+
+    const rect =
+      pressureDisplay
+        .getBoundingClientRect();
+
+    const position =
+      (e.clientX - rect.left)
+      / rect.width;
+
+    const pressure =
+      Math.round(
+        1 + position * 1099
+      );
+
+    pressureValue.textContent =
+      pressure.toLocaleString();
+
+  }
+);
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const observer =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target
+            .classList
+            .add("visible");
+
+          observer.unobserve(
+            entry.target
+          );
+
+        }
+
+      });
+
+    },
+    {
+      threshold: .15
+    }
+  );
+
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(element => {
+
+    observer.observe(element);
+
+  });
+
+
+/* =========================
+   TIMELINE CLICK EFFECT
+========================= */
+
+document
+  .querySelectorAll(".timeline-card")
+  .forEach(card => {
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        card.classList.toggle(
+          "expanded"
+        );
+
+      }
+    );
+
+  });
+
+</script>
+
+</body>
+</html>
