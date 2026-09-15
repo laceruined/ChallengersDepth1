@@ -10,11 +10,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600&display=swap');
 
-
-/* =========================================================
-   ROOT
-========================================================= */
-
 :root {
     --cyan: #73f6ff;
     --blue: #087ea4;
@@ -24,11 +19,6 @@
     --text: #d7f5fa;
     --muted: #7195a1;
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
     margin: 0;
@@ -47,58 +37,31 @@ body {
     overflow-x: hidden;
 }
 
-
-/* =========================================================
-   CURSOR GLOW
-========================================================= */
-
 .cursor-glow {
     position: fixed;
-
     width: 300px;
     height: 300px;
-
     border-radius: 50%;
-
     pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(75,230,255,.12),
-            transparent 65%
-        );
-
+    background: radial-gradient(
+        circle,
+        rgba(75,230,255,.12),
+        transparent 65%
+    );
     transform: translate(-50%, -50%);
-
     z-index: 50;
-
-    transition:
-        left .08s linear,
-        top .08s linear;
 }
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 nav {
     position: fixed;
-
     top: 0;
     left: 0;
-
     width: 100%;
-
     padding: 25px 6%;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     z-index: 20;
-
     background:
         linear-gradient(
             180deg,
@@ -106,14 +69,12 @@ nav {
             rgba(1,11,23,.65),
             transparent
         );
-
     backdrop-filter: blur(8px);
 }
 
 .logo {
     font-size: 14px;
     font-weight: 700;
-
     letter-spacing: 4px;
 }
 
@@ -129,11 +90,8 @@ nav .links {
 
 nav a {
     color: rgba(255,255,255,.65);
-
     text-decoration: none;
-
     font-size: 13px;
-
     transition: .3s;
 }
 
@@ -148,15 +106,11 @@ nav a:hover {
 
 .hero {
     min-height: 100vh;
-
     position: relative;
-
     overflow: hidden;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-align: center;
 
     background:
@@ -174,18 +128,12 @@ nav a:hover {
         );
 }
 
-
-/* sunlight */
-
 .sunlight {
     position: absolute;
-
     width: 1000px;
     height: 1000px;
-
     top: -600px;
     left: 50%;
-
     transform: translateX(-50%);
 
     background:
@@ -205,7 +153,6 @@ nav a:hover {
 }
 
 @keyframes sunlightMove {
-
     from {
         transform:
             translateX(-50%)
@@ -219,48 +166,25 @@ nav a:hover {
     }
 }
 
-
-/* =========================================================
-   HERO CONTENT
-========================================================= */
-
 .hero-content {
     position: relative;
-
     z-index: 3;
-
     max-width: 950px;
-
-    padding:
-        130px
-        25px
-        100px;
+    padding: 130px 25px 100px;
 }
 
 .eyebrow {
     color: var(--cyan);
-
     font-size: 11px;
-
     text-transform: uppercase;
-
     letter-spacing: 5px;
-
     margin-bottom: 22px;
 }
 
 .hero h1 {
     font-family: "Playfair Display", serif;
-
-    font-size:
-        clamp(
-            65px,
-            11vw,
-            150px
-        );
-
+    font-size: clamp(65px, 11vw, 150px);
     line-height: .86;
-
     letter-spacing: -7px;
 
     background:
@@ -272,7 +196,6 @@ nav a:hover {
         );
 
     -webkit-background-clip: text;
-
     color: transparent;
 
     text-shadow:
@@ -282,30 +205,17 @@ nav a:hover {
 
 .hero-description {
     max-width: 600px;
-
     margin: 35px auto 0;
-
     color: #b6dce7;
-
     line-height: 1.8;
-
     font-size: 16px;
 }
 
-
-/* =========================================================
-   HERO BUTTON
-========================================================= */
-
 .start-button {
     display: inline-flex;
-
     align-items: center;
-
     gap: 12px;
-
     margin-top: 35px;
-
     padding: 15px 25px;
 
     border:
@@ -313,26 +223,20 @@ nav a:hover {
         rgba(115,246,255,.5);
 
     border-radius: 100px;
-
     color: white;
-
     text-decoration: none;
 
     background:
         rgba(255,255,255,.05);
 
     backdrop-filter: blur(10px);
-
     transition: .35s;
 }
 
 .start-button:hover {
     background: var(--cyan);
-
     color: #00202d;
-
     transform: translateY(-4px);
-
     box-shadow:
         0 15px 50px
         rgba(0,220,255,.25);
@@ -345,17 +249,10 @@ nav a:hover {
 
 .bubbles span {
     position: absolute;
-
     bottom: -50px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.3);
-
+    border: 1px solid rgba(255,255,255,.3);
     border-radius: 50%;
-
-    animation:
-        rise linear infinite;
+    animation: rise linear infinite;
 }
 
 @keyframes rise {
@@ -364,7 +261,6 @@ nav a:hover {
         transform:
             translateY(0)
             translateX(0);
-
         opacity: 0;
     }
 
@@ -376,72 +272,54 @@ nav a:hover {
         transform:
             translateY(-110vh)
             translateX(40px);
-
         opacity: 0;
     }
 }
 
 .bubbles span:nth-child(1) {
     left: 8%;
-
     width: 8px;
     height: 8px;
-
     animation-duration: 12s;
 }
 
 .bubbles span:nth-child(2) {
     left: 20%;
-
     width: 14px;
     height: 14px;
-
     animation-duration: 16s;
-
     animation-delay: 3s;
 }
 
 .bubbles span:nth-child(3) {
     left: 38%;
-
     width: 6px;
     height: 6px;
-
     animation-duration: 10s;
-
     animation-delay: 2s;
 }
 
 .bubbles span:nth-child(4) {
     left: 67%;
-
     width: 18px;
     height: 18px;
-
     animation-duration: 18s;
-
     animation-delay: 5s;
 }
 
 .bubbles span:nth-child(5) {
     left: 85%;
-
     width: 9px;
     height: 9px;
-
     animation-duration: 13s;
-
     animation-delay: 1s;
 }
 
 .bubbles span:nth-child(6) {
     left: 55%;
-
     width: 11px;
     height: 11px;
-
     animation-duration: 15s;
-
     animation-delay: 6s;
 }
 
@@ -451,9 +329,7 @@ nav a:hover {
 ========================================================= */
 
 .intro {
-    padding:
-        130px 7%
-        80px;
+    padding: 130px 7% 80px;
 
     background:
         radial-gradient(
@@ -466,81 +342,49 @@ nav a:hover {
 
 .section-number {
     color: var(--cyan);
-
     font-size: 11px;
-
     letter-spacing: 4px;
-
     text-transform: uppercase;
 }
 
 .intro h2 {
     font-family: "Playfair Display", serif;
-
-    font-size:
-        clamp(
-            45px,
-            7vw,
-            90px
-        );
-
+    font-size: clamp(45px, 7vw, 90px);
     line-height: 1;
-
     margin-top: 15px;
-
     max-width: 800px;
 }
 
 .intro p {
     max-width: 650px;
-
     margin-top: 25px;
-
     color: var(--muted);
-
     line-height: 1.8;
-
     font-size: 15px;
 }
 
 
 /* =========================================================
-   FACT SECTION
+   ANIMAL DISCOVERY
 ========================================================= */
 
 .facts {
-    padding:
-        70px 7%
-        140px;
-
+    padding: 70px 7% 140px;
     background: #010b15;
 }
 
 .fact-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 25px;
-
     max-width: 1200px;
-
     margin: 60px auto 0;
 }
 
-
-/* =========================================================
-   FACT CARD
-========================================================= */
-
 .fact-card {
     position: relative;
-
     min-height: 380px;
-
     padding: 40px;
-
     overflow: hidden;
 
     border:
@@ -549,12 +393,8 @@ nav a:hover {
 
     border-radius: 30px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(11,71,94,.55),
-            rgba(1,13,24,.9)
-        );
+    background-size: cover;
+    background-position: center;
 
     transition:
         transform .5s,
@@ -562,121 +402,121 @@ nav a:hover {
         box-shadow .5s;
 
     opacity: 0;
-
-    transform:
-        translateY(60px);
+    transform: translateY(60px);
 }
 
 .fact-card.visible {
     opacity: 1;
+    transform: translateY(0);
+}
 
-    transform:
-        translateY(0);
+/* dark image overlay */
+
+.fact-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,10,20,.05),
+            rgba(0,7,14,.25) 30%,
+            rgba(0,5,10,.94) 100%
+        );
+
+    z-index: 0;
 }
 
 .fact-card:hover {
-    transform:
-        translateY(-10px);
-
+    transform: translateY(-10px);
     border-color:
         rgba(115,246,255,.35);
 
     box-shadow:
         0 30px 80px
-        rgba(0,180,220,.12);
+        rgba(0,180,220,.16);
 }
 
+/* content above image */
 
-/* decorative circle */
-
-.fact-card::before {
-    content: "";
-
-    position: absolute;
-
-    width: 220px;
-    height: 220px;
-
-    border-radius: 50%;
-
-    right: -90px;
-    top: -90px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(115,246,255,.14),
-            transparent 70%
-        );
+.fact-card > * {
+    position: relative;
+    z-index: 2;
 }
-
-
-/* number */
 
 .fact-number {
     color: var(--cyan);
-
     font-size: 11px;
-
     letter-spacing: 3px;
 }
 
-
-/* icon */
-
 .fact-icon {
-    font-size: 50px;
-
-    margin:
-        25px 0 20px;
-
-    opacity: .9;
+    height: 70px;
 }
-
-
-/* title */
 
 .fact-card h3 {
     position: relative;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
+    font-family: "Playfair Display", serif;
     font-size: 32px;
-
     margin-bottom: 15px;
 }
 
 .fact-card p {
     position: relative;
-
-    color: #8db5c0;
-
+    color: #c2e3e9;
     line-height: 1.8;
-
     font-size: 14px;
-
     max-width: 500px;
 }
 
 
 /* =========================================================
-   WIDE FACT
+   ANIMAL IMAGES
+========================================================= */
+
+.whale-card {
+    background-image:
+        url("https://ocean.si.edu/sites/default/files/styles/facebook_twitter_card_image/public/2023-11/OceanViewsHH_VanessaMignon_Humpbacks_Edited.jpg.webp?itok=RJd-ZDKN");
+}
+
+.octopus-card {
+    background-image:
+        url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpHdQZtA1E0VJ5K2r1NDcEjTkBQxDlW2CXxhaxMl1j3mcqqMxYFh2kJpw&s=10");
+}
+
+.jelly-card {
+    background-image:
+        url("https://images.twinkl.co.uk/tw1n/image/private/t_630/u/ux/jellyfish_ver_1.jpg");
+}
+
+.shark-card {
+    background-image:
+        url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvIqKCbvc_tya7nGtCbrcGVaS1CgJQ0vcCg5Z950MgE485AE-CP_ebqzz0&s=10");
+}
+
+.turtle-card {
+    background-image:
+        url("https://cdn.discovermagazine.com/assets/image/52981/sea-turtle-swimming-x.jpg");
+}
+
+.deep-card {
+    background-image:
+        url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3q0haMBMvBYlJ9vyTaJCGdeE1fD8--3YrbkxsVKVT-8FRe4bfITUwhgNv&s=10");
+}
+
+
+/* =========================================================
+   WIDE CARD
 ========================================================= */
 
 .fact-wide {
     grid-column: 1 / -1;
-
-    min-height: 300px;
+    min-height: 330px;
 
     display: flex;
-
-    justify-content:
-        space-between;
-
+    justify-content: space-between;
     align-items: center;
-
     gap: 40px;
 }
 
@@ -685,39 +525,31 @@ nav a:hover {
 }
 
 .fact-big-number {
-    font-size:
-        clamp(
-            70px,
-            12vw,
-            150px
-        );
-
+    font-size: clamp(70px, 12vw, 150px);
     font-weight: 700;
-
     letter-spacing: -8px;
-
     color: var(--cyan);
-
     opacity: .9;
-
     white-space: nowrap;
 }
 
 
 /* =========================================================
-   OCEAN LAYERS
+   NEW SECTION — OCEAN RHYTHM
 ========================================================= */
 
-.layers {
-    padding:
-        130px 7%
-        150px;
+.rhythm {
+    padding: 140px 7% 160px;
 
     position: relative;
-
     overflow: hidden;
 
     background:
+        radial-gradient(
+            circle at 70% 30%,
+            rgba(0,150,190,.13),
+            transparent 35%
+        ),
         linear-gradient(
             180deg,
             #010b15,
@@ -726,43 +558,38 @@ nav a:hover {
         );
 }
 
-.layers-header {
-    max-width: 650px;
-
+.rhythm-header {
+    max-width: 750px;
     margin-bottom: 70px;
 }
 
-.layers-header h2 {
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            45px,
-            6vw,
-            80px
-        );
-
-    margin:
-        12px 0 20px;
+.rhythm-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(45px, 6vw, 80px);
+    line-height: .95;
+    margin: 15px 0 20px;
 }
 
-.layers-header p {
+.rhythm-header p {
     color: var(--muted);
-
     line-height: 1.8;
+    max-width: 650px;
 }
 
-
-/* =========================================================
-   OCEAN DEPTH DISPLAY
-========================================================= */
-
-.depth-explorer {
-    max-width: 1000px;
-
+.rhythm-grid {
+    max-width: 1200px;
     margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.rhythm-card {
+    min-height: 430px;
+
+    position: relative;
+    overflow: hidden;
 
     border:
         1px solid
@@ -770,18 +597,120 @@ nav a:hover {
 
     border-radius: 30px;
 
+    display: flex;
+    align-items: flex-end;
+
+    padding: 30px;
+
+    background-size: cover;
+    background-position: center;
+
+    transition:
+        transform .5s,
+        box-shadow .5s;
+}
+
+.rhythm-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            transparent 15%,
+            rgba(0,5,10,.9)
+        );
+}
+
+.rhythm-card:hover {
+    transform: translateY(-12px);
+    box-shadow:
+        0 30px 80px
+        rgba(0,190,230,.15);
+}
+
+.rhythm-content {
+    position: relative;
+    z-index: 2;
+}
+
+.rhythm-time {
+    color: var(--cyan);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.rhythm-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+.rhythm-card p {
+    color: #afd1d9;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.rhythm-night {
+    background-image:
+        url("https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=1200&q=85");
+}
+
+.rhythm-day {
+    background-image:
+        url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=85");
+}
+
+.rhythm-deep {
+    background-image:
+        url("https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=1200&q=85");
+}
+
+
+/* =========================================================
+   INTERACTIVE DEPTH
+========================================================= */
+
+.depth-section {
+    padding: 130px 7% 150px;
+    background: #00070d;
+}
+
+.depth-header {
+    max-width: 700px;
+    margin-bottom: 55px;
+}
+
+.depth-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(45px, 6vw, 80px);
+    margin: 12px 0 20px;
+}
+
+.depth-header p {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.depth-explorer {
+    max-width: 1000px;
+    margin: auto;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 30px;
     overflow: hidden;
 
     background:
         rgba(255,255,255,.025);
 }
 
-
-/* depth bar */
-
 .depth-bar {
     height: 550px;
-
     position: relative;
 
     background:
@@ -796,14 +725,9 @@ nav a:hover {
         );
 }
 
-
-/* horizontal layers */
-
 .ocean-layer {
     position: absolute;
-
     left: 0;
-
     width: 100%;
 
     padding: 15px 25px;
@@ -816,19 +740,15 @@ nav a:hover {
         rgba(255,255,255,.7);
 
     font-size: 11px;
-
     letter-spacing: 2px;
-
     text-transform: uppercase;
 
     cursor: pointer;
-
     transition: .3s;
 }
 
 .ocean-layer:hover {
     color: white;
-
     background:
         rgba(115,246,255,.06);
 }
@@ -853,14 +773,8 @@ nav a:hover {
     top: 91%;
 }
 
-
-/* =========================================================
-   DEPTH INFORMATION
-========================================================= */
-
 .layer-info {
     padding: 35px;
-
     border-top:
         1px solid
         rgba(255,255,255,.08);
@@ -869,20 +783,14 @@ nav a:hover {
 }
 
 .layer-info h3 {
-    font-family:
-        "Playfair Display",
-        serif;
-
+    font-family: "Playfair Display", serif;
     font-size: 30px;
-
     margin-bottom: 10px;
 }
 
 .layer-info p {
     color: var(--muted);
-
     line-height: 1.7;
-
     font-size: 14px;
 }
 
@@ -892,10 +800,7 @@ nav a:hover {
 ========================================================= */
 
 .random-section {
-    padding:
-        130px 7%
-        150px;
-
+    padding: 130px 7% 150px;
     text-align: center;
 
     background:
@@ -912,32 +817,19 @@ nav a:hover {
 }
 
 .random-section h2 {
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            45px,
-            6vw,
-            75px
-        );
+    font-family: "Playfair Display", serif;
+    font-size: clamp(45px, 6vw, 75px);
 }
 
 .random-box {
     max-width: 700px;
-
     min-height: 220px;
 
-    margin:
-        45px auto 30px;
-
+    margin: 45px auto 30px;
     padding: 45px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border:
@@ -949,41 +841,30 @@ nav a:hover {
     background:
         rgba(255,255,255,.035);
 
-    backdrop-filter:
-        blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 #randomFact {
     color: #c4eaf0;
-
     font-size: 18px;
-
     line-height: 1.8;
+    transition: opacity .2s ease;
 }
-
-
-/* random button */
 
 .random-button {
     border: none;
 
-    padding:
-        15px 25px;
+    padding: 15px 25px;
 
     border-radius: 100px;
 
     background: var(--cyan);
-
     color: #00202d;
 
-    font-family:
-        "DM Sans",
-        sans-serif;
-
+    font-family: "DM Sans", sans-serif;
     font-weight: 700;
 
     cursor: pointer;
-
     transition: .3s;
 }
 
@@ -999,19 +880,16 @@ nav a:hover {
 
 
 /* =========================================================
-   CHALLENGER DEEP TEASER
+   CHALLENGER DEEP
 ========================================================= */
 
 .challenger {
     min-height: 600px;
-
-    padding:
-        130px 7%;
+    padding: 130px 7%;
 
     position: relative;
 
     display: flex;
-
     align-items: center;
 
     overflow: hidden;
@@ -1031,65 +909,37 @@ nav a:hover {
 
 .challenger-content {
     max-width: 750px;
-
     position: relative;
-
     z-index: 2;
 }
 
 .challenger h2 {
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(
-            50px,
-            7vw,
-            95px
-        );
-
+    font-family: "Playfair Display", serif;
+    font-size: clamp(50px, 7vw, 95px);
     line-height: .95;
-
-    margin:
-        15px 0 25px;
+    margin: 15px 0 25px;
 }
 
 .challenger p {
     color: #7799a4;
-
     max-width: 600px;
-
     line-height: 1.8;
-
     font-size: 15px;
 }
 
-
-/* giant background text */
-
 .deep-text {
     position: absolute;
-
     right: -100px;
-
     bottom: -80px;
 
-    font-size:
-        clamp(
-            120px,
-            25vw,
-            350px
-        );
+    font-size: clamp(120px, 25vw, 350px);
 
     font-weight: 700;
 
     color:
         rgba(115,246,255,.025);
 
-    letter-spacing:
-        -15px;
-
+    letter-spacing: -15px;
     pointer-events: none;
 }
 
@@ -1099,42 +949,32 @@ nav a:hover {
 ========================================================= */
 
 footer {
-    padding:
-        35px 7%;
-
-    background:
-        #000307;
+    padding: 35px 7%;
+    background: #000307;
 
     display: flex;
+    justify-content: space-between;
 
-    justify-content:
-        space-between;
-
-    color:
-        #47636c;
+    color: #47636c;
 
     font-size: 11px;
-
     letter-spacing: 2px;
 }
 
 
 /* =========================================================
-   SCROLL INDICATOR
+   SCROLL
 ========================================================= */
 
 .scroll {
     position: absolute;
-
     bottom: 30px;
-
     left: 50%;
 
     transform:
         translateX(-50%);
 
     font-size: 10px;
-
     letter-spacing: 3px;
 
     color:
@@ -1186,14 +1026,20 @@ footer {
 
     .fact-wide {
         grid-column: auto;
-
         flex-direction: column;
-
         align-items: flex-start;
     }
 
     .fact-big-number {
         font-size: 80px;
+    }
+
+    .rhythm-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rhythm-card {
+        min-height: 380px;
     }
 
     .depth-bar {
@@ -1206,16 +1052,9 @@ footer {
 
     footer {
         flex-direction: column;
-
         gap: 12px;
     }
-
 }
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1236,11 +1075,6 @@ footer {
 
 <body>
 
-
-<!-- =======================================================
-     CURSOR
-======================================================= -->
-
 <div class="cursor-glow"></div>
 
 
@@ -1256,26 +1090,17 @@ footer {
 
     <div class="links">
 
-        <a href="home.html">
-            Home
-        </a>
+        <a href="home.html">Home</a>
 
-        <a href="explore.html">
-            Explore
-        </a>
+        <a href="explore.html">Explore</a>
 
-        <a href="contacts.html">
-            Contact
-        </a>
+        <a href="contacts.html">Contact</a>
 
-        <a href="about.html">
-            About
-        </a>
+        <a href="about.html">About</a>
 
     </div>
 
 </nav>
-
 
 
 <!-- =======================================================
@@ -1286,18 +1111,14 @@ footer {
 
     <div class="sunlight"></div>
 
-
     <div class="bubbles">
-
         <span></span>
         <span></span>
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-
     </div>
-
 
     <div class="hero-content">
 
@@ -1305,12 +1126,10 @@ footer {
             02 / Ocean Discoveries
         </div>
 
-
         <h1>
             DISCOVER<br>
             THE UNKNOWN
         </h1>
-
 
         <p class="hero-description">
 
@@ -1323,27 +1142,21 @@ footer {
 
         </p>
 
-
         <a
             href="#facts"
             class="start-button"
         >
-
             Discover facts
-
             <span>↓</span>
-
         </a>
 
     </div>
-
 
     <div class="scroll">
         SCROLL TO DISCOVER ↓
     </div>
 
 </section>
-
 
 
 <!-- =======================================================
@@ -1353,33 +1166,26 @@ footer {
 <section class="intro">
 
     <div class="section-number">
-        01 / DID YOU KNOW?
+        01 / MARINE LIFE
     </div>
-
 
     <h2>
         The ocean is stranger
         than fiction.
     </h2>
 
-
     <p>
-
-        From animals that can change color to places where
-        sunlight never reaches, the underwater world is full
-        of surprises.
-
-        Here are some of the most fascinating facts about
-        Earth's oceans.
-
+        From enormous whales to almost invisible
+        jellyfish, the ocean is home to life that
+        looks like it belongs on another planet.
+        Meet some of its most fascinating inhabitants.
     </p>
 
 </section>
 
 
-
 <!-- =======================================================
-     FACTS
+     ANIMAL FACTS
 ======================================================= -->
 
 <section
@@ -1387,227 +1193,267 @@ footer {
     id="facts"
 >
 
-
     <div class="fact-grid">
 
 
-        <!-- FACT 01 -->
-
-        <article class="fact-card">
+        <article class="fact-card whale-card">
 
             <div class="fact-number">
-                FACT 001
+                SPECIES 001
             </div>
 
-            <div class="fact-icon">
-                
-            </div
+            <div class="fact-icon"></div>
 
             <h3>
-                The ocean is enormous.
+                The Blue Whale
             </h3>
 
             <p>
-
-                The ocean covers about 71% of Earth's
-                surface, making it one of the biggest
-                environments on our planet.
-
+                The blue whale is the largest animal
+                known to have ever lived. Its enormous
+                body can stretch longer than a basketball
+                court.
             </p>
 
         </article>
 
 
-
-        <!-- FACT 02 -->
-
-        <article class="fact-card">
+        <article class="fact-card octopus-card">
 
             <div class="fact-number">
-                FACT 002
+                SPECIES 002
             </div>
 
-            <div class="fact-icon">
-                
-            </div>
+            <div class="fact-icon"></div>
 
             <h3>
-                Octopuses have three hearts.
+                The Three-Hearted Octopus
             </h3>
 
             <p>
-
-                An octopus has three hearts.
-
-                Two pump blood toward the gills,
-                while the third pumps blood to the
-                rest of the body.
-
+                Octopuses have three hearts and blue blood.
+                Two hearts move blood through the gills,
+                while the third sends it around the body.
             </p>
 
         </article>
 
 
-
-        <!-- FACT 03 -->
-
-        <article class="fact-card">
+        <article class="fact-card jelly-card">
 
             <div class="fact-number">
-                FACT 003
+                SPECIES 003
             </div>
 
-            <div class="fact-icon">
-                
-            </div>
+            <div class="fact-icon"></div>
 
             <h3>
-                The deep sea is completely dark.
+                Ancient Jellyfish
             </h3>
 
             <p>
-
-                Sunlight cannot reach the deepest parts
-                of the ocean.
-
-                Below the sunlit zone, darkness dominates
-                and many animals produce their own light.
-
+                Jellyfish have drifted through Earth's
+                oceans for hundreds of millions of years,
+                surviving enormous changes to the planet.
             </p>
 
         </article>
 
 
-
-        <!-- FACT 04 -->
-
-        <article class="fact-card">
+        <article class="fact-card shark-card">
 
             <div class="fact-number">
-                FACT 004
+                SPECIES 004
             </div>
 
-            <div class="fact-icon">
-                
-            </div>
+            <div class="fact-icon"></div>
 
             <h3>
-                Some animals make their own light.
+                Ancient Sharks
             </h3>
 
             <p>
-
-                Bioluminescence allows certain marine
-                organisms to produce light through
-                chemical reactions.
-
-                It can be used for communication,
-                attracting prey, or avoiding predators.
-
-            </p>
-
-        </article>
-
-
-
-        <!-- FACT 05 -->
-
-        <article class="fact-card">
-
-            <div class="fact-number">
-                FACT 005
-            </div>
-
-            <div class="fact-icon">
-                
-            </div>
-
-            <h3>
-                There are underwater mountains.
-            </h3>
-
-            <p>
-
-                The seafloor contains enormous mountain
-                ranges, volcanoes, valleys, trenches,
-                and plains.
-
-                Much of this landscape is hidden beneath
-                kilometers of water.
-
-            </p>
-
-        </article>
-
-
-
-        <!-- FACT 06 -->
-
-        <article class="fact-card">
-
-            <div class="fact-number">
-                FACT 006
-            </div>
-
-            <div class="fact-icon">
-                
-            </div>
-
-            <h3>
-                Sharks are ancient.
-            </h3>
-
-            <p>
-
                 Sharks have existed for hundreds of
-                millions of years.
-
-                Their evolutionary history stretches
-                back long before humans appeared.
-
+                millions of years, long before humans
+                appeared on Earth.
             </p>
 
         </article>
 
 
+        <article class="fact-card turtle-card">
 
-        <!-- WIDE FACT -->
+            <div class="fact-number">
+                SPECIES 005
+            </div>
 
-        <article
-            class="fact-card fact-wide"
-        >
+            <div class="fact-icon"></div>
+
+            <h3>
+                Ocean Navigators
+            </h3>
+
+            <p>
+                Sea turtles can travel thousands of
+                kilometres across open water and return
+                to important coastal areas.
+            </p>
+
+        </article>
+
+
+        <article class="fact-card deep-card">
+
+            <div class="fact-number">
+                SPECIES 006
+            </div>
+
+            <div class="fact-icon"></div>
+
+            <h3>
+                Life Without Sunlight
+            </h3>
+
+            <p>
+                Some deep-sea ecosystems survive without
+                sunlight, relying on chemical energy from
+                hydrothermal vents.
+            </p>
+
+        </article>
+
+
+        <article class="fact-card fact-wide">
 
             <div class="fact-wide-text">
 
                 <div class="fact-number">
-                    FACT 007
+                    THE BIGGER PICTURE
                 </div>
 
-                <div class="fact-icon">
-                    
-                </div>
+                <div class="fact-icon"></div>
 
                 <h3>
-                    We have explored only a fraction
+                    We have only seen a fraction
                     of the ocean.
                 </h3>
 
                 <p>
-
-                    Despite the technology available to
-                    modern explorers, huge parts of the
-                    ocean remain poorly understood.
-
-                    Every expedition can reveal something
-                    new.
-
+                    Vast parts of the underwater world
+                    remain difficult to explore. Every
+                    expedition has the potential to reveal
+                    species, ecosystems and landscapes that
+                    have never been seen before.
                 </p>
 
             </div>
 
-
             <div class="fact-big-number">
                 ?%
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     02 / NEW CONCEPT
+======================================================= -->
+
+<section class="rhythm">
+
+    <div class="rhythm-header">
+
+        <div class="section-number">
+            02 / LIFE BELOW
+        </div>
+
+        <h2>
+            The ocean<br>
+            never sleeps.
+        </h2>
+
+        <p>
+            Beneath the surface, life follows its own
+            rhythm. Some creatures hunt in daylight,
+            others rise from the darkness, and deep below,
+            an entirely different world continues in
+            almost complete darkness.
+        </p>
+
+    </div>
+
+
+    <div class="rhythm-grid">
+
+
+        <article class="rhythm-card rhythm-day">
+
+            <div class="rhythm-content">
+
+                <div class="rhythm-time">
+                    THE SURFACE
+                </div>
+
+                <h3>
+                    A world of light.
+                </h3>
+
+                <p>
+                    Sunlight powers enormous ecosystems.
+                    Coral reefs, fish, turtles and whales
+                    all occupy the brighter upper ocean.
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <article class="rhythm-card rhythm-night">
+
+            <div class="rhythm-content">
+
+                <div class="rhythm-time">
+                    AFTER DARK
+                </div>
+
+                <h3>
+                    The migration begins.
+                </h3>
+
+                <p>
+                    When darkness arrives, countless
+                    animals travel upward from deeper water
+                    to feed before disappearing again.
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <article class="rhythm-card rhythm-deep">
+
+            <div class="rhythm-content">
+
+                <div class="rhythm-time">
+                    THE DEEP
+                </div>
+
+                <h3>
+                    A world without sun.
+                </h3>
+
+                <p>
+                    Far below the surface, darkness is
+                    permanent. Bioluminescent creatures
+                    create their own flashes of light.
+                </p>
+
             </div>
 
         </article>
@@ -1618,47 +1464,36 @@ footer {
 </section>
 
 
-
 <!-- =======================================================
-     OCEAN LAYERS
+     OCEAN DEPTH
 ======================================================= -->
 
-<section class="layers">
+<section class="depth-section">
 
-
-    <div class="layers-header">
+    <div class="depth-header">
 
         <div class="section-number">
-            02 / GO DEEPER
+            03 / GO DEEPER
         </div>
 
-
         <h2>
-            Five worlds
+            Five worlds<br>
             beneath the waves.
         </h2>
 
-
         <p>
-
             The ocean isn't one single environment.
-
             As you descend, light disappears,
             temperatures change, and pressure increases.
-
-            Click a layer to learn more.
-
+            Click a layer to explore.
         </p>
 
     </div>
 
 
-
     <div class="depth-explorer">
 
-
         <div class="depth-bar">
-
 
             <div
                 class="ocean-layer layer-surface"
@@ -1668,7 +1503,6 @@ footer {
                 0–200 m · SUNLIGHT ZONE
             </div>
 
-
             <div
                 class="ocean-layer layer-twilight"
                 data-title="Twilight Zone"
@@ -1676,7 +1510,6 @@ footer {
             >
                 200–1,000 m · TWILIGHT ZONE
             </div>
-
 
             <div
                 class="ocean-layer layer-midnight"
@@ -1686,7 +1519,6 @@ footer {
                 1,000–4,000 m · MIDNIGHT ZONE
             </div>
 
-
             <div
                 class="ocean-layer layer-abyss"
                 data-title="Abyssal Zone"
@@ -1695,7 +1527,6 @@ footer {
                 4,000–6,000 m · ABYSSAL ZONE
             </div>
 
-
             <div
                 class="ocean-layer layer-hadal"
                 data-title="Hadal Zone"
@@ -1703,7 +1534,6 @@ footer {
             >
                 6,000 m+ · HADAL ZONE
             </div>
-
 
         </div>
 
@@ -1715,19 +1545,15 @@ footer {
             </h3>
 
             <p id="layerDescription">
-
                 Click one of the ocean layers above to
                 discover what happens as you travel deeper.
-
             </p>
 
         </div>
 
-
     </div>
 
 </section>
-
 
 
 <!-- =======================================================
@@ -1736,28 +1562,22 @@ footer {
 
 <section class="random-section">
 
-
     <div class="eyebrow">
-        03 / RANDOM DISCOVERY
+        04 / RANDOM DISCOVERY
     </div>
-
 
     <h2>
         Give me a fact.
     </h2>
 
-
     <div class="random-box">
 
         <p id="randomFact">
-
             Click the button below and discover
             something unexpected about the ocean.
-
         </p>
 
     </div>
-
 
     <button
         class="random-button"
@@ -1766,9 +1586,7 @@ footer {
         Reveal a random fact
     </button>
 
-
 </section>
-
 
 
 <!-- =======================================================
@@ -1777,20 +1595,16 @@ footer {
 
 <section class="challenger">
 
-
     <div class="challenger-content">
 
-
         <div class="section-number">
-            04 / THE DEEP
+            05 / THE DEEP
         </div>
-
 
         <h2>
             And then there's
             Challenger Deep.
         </h2>
-
 
         <p>
 
@@ -1809,29 +1623,21 @@ footer {
 
         </p>
 
-
         <a
             href="about.html"
             class="start-button"
         >
-
             Explore its history
-
             <span>→</span>
-
         </a>
 
-
     </div>
-
 
     <div class="deep-text">
         DEEP
     </div>
 
-
 </section>
-
 
 
 <!-- =======================================================
@@ -1841,7 +1647,7 @@ footer {
 <footer>
 
     <span>
-        OCEAN / EXPLORER
+        CHALLENGER'S / DEPTH
     </span>
 
     <span>
@@ -1851,19 +1657,14 @@ footer {
 </footer>
 
 
-
 <script>
-
 
 /* =========================================================
    CURSOR GLOW
 ========================================================= */
 
 const glow =
-    document.querySelector(
-        ".cursor-glow"
-    );
-
+    document.querySelector(".cursor-glow");
 
 document.addEventListener(
     "mousemove",
@@ -1879,16 +1680,12 @@ document.addEventListener(
 );
 
 
-
 /* =========================================================
    SCROLL REVEAL
 ========================================================= */
 
 const cards =
-    document.querySelectorAll(
-        ".fact-card"
-    );
-
+    document.querySelectorAll(".fact-card");
 
 const observer =
     new IntersectionObserver(
@@ -1916,11 +1713,9 @@ const observer =
         }
     );
 
-
 cards.forEach(
     card => observer.observe(card)
 );
-
 
 
 /* =========================================================
@@ -1928,22 +1723,13 @@ cards.forEach(
 ========================================================= */
 
 const layers =
-    document.querySelectorAll(
-        ".ocean-layer"
-    );
-
+    document.querySelectorAll(".ocean-layer");
 
 const layerTitle =
-    document.querySelector(
-        "#layerTitle"
-    );
-
+    document.querySelector("#layerTitle");
 
 const layerDescription =
-    document.querySelector(
-        "#layerDescription"
-    );
-
+    document.querySelector("#layerDescription");
 
 layers.forEach(
     layer => {
@@ -1952,30 +1738,17 @@ layers.forEach(
             "click",
             () => {
 
-                const title =
+                layerTitle.textContent =
                     layer.dataset.title;
 
-                const description =
-                    layer.dataset.description;
-
-
-                layerTitle.textContent =
-                    title;
-
                 layerDescription.textContent =
-                    description;
-
+                    layer.dataset.description;
 
                 layers.forEach(
                     item => {
-
-                        item.style
-                            .background =
-                            "";
-
+                        item.style.background = "";
                     }
                 );
-
 
                 layer.style.background =
                     "rgba(115,246,255,.08)";
@@ -1985,7 +1758,6 @@ layers.forEach(
 
     }
 );
-
 
 
 /* =========================================================
@@ -2020,18 +1792,11 @@ const randomFacts = [
 
 ];
 
-
 const randomFact =
-    document.querySelector(
-        "#randomFact"
-    );
-
+    document.querySelector("#randomFact");
 
 const randomButton =
-    document.querySelector(
-        "#randomButton"
-    );
-
+    document.querySelector("#randomButton");
 
 randomButton.addEventListener(
     "click",
@@ -2043,9 +1808,7 @@ randomButton.addEventListener(
                 * randomFacts.length
             );
 
-
         randomFact.style.opacity = "0";
-
 
         setTimeout(
             () => {
@@ -2064,22 +1827,12 @@ randomButton.addEventListener(
 );
 
 
-/* smooth transition */
-
-randomFact.style.transition =
-    "opacity .2s ease";
-
-
-
 /* =========================================================
    HERO PARALLAX
 ========================================================= */
 
 const sunlight =
-    document.querySelector(
-        ".sunlight"
-    );
-
+    document.querySelector(".sunlight");
 
 document.addEventListener(
     "mousemove",
@@ -2092,14 +1845,12 @@ document.addEventListener(
                 - .5
             ) * 20;
 
-
         const y =
             (
                 event.clientY /
                 window.innerHeight
                 - .5
             ) * 20;
-
 
         sunlight.style.marginLeft =
             x + "px";
@@ -2116,7 +1867,7 @@ document.addEventListener(
 ========================================================= */
 
 document
-    .querySelectorAll(".fact-card")
+    .querySelectorAll(".fact-card, .rhythm-card")
     .forEach(
         card => {
 
@@ -2127,16 +1878,13 @@ document
                     const rect =
                         card.getBoundingClientRect();
 
-
                     const x =
                         event.clientX -
                         rect.left;
 
-
                     const y =
                         event.clientY -
                         rect.top;
-
 
                     const rotateX =
                         (
@@ -2145,14 +1893,12 @@ document
                             - .5
                         ) * -4;
 
-
                     const rotateY =
                         (
                             (x /
                             rect.width)
                             - .5
                         ) * 4;
-
 
                     card.style.transform =
                         `
@@ -2164,7 +1910,6 @@ document
 
                 }
             );
-
 
             card.addEventListener(
                 "mouseleave",
@@ -2179,9 +1924,7 @@ document
         }
     );
 
-
 </script>
-
 
 </body>
 </html>
