@@ -1,78 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title> About | Challenger's Depth</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>About | Challenger's Depth</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600&display=swap"
+  rel="stylesheet"
+>
+
 
 <style>
 
+/* =========================================================
+   VARIABLES
+========================================================= */
+
 :root {
+
   --cyan: #73f6ff;
+
   --blue: #087ea4;
+
   --deep: #010812;
+
   --dark: #00040a;
+
   --glass: rgba(255,255,255,.06);
+
   --muted: #7897a3;
+
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
+
   margin: 0;
+
   padding: 0;
+
   box-sizing: border-box;
+
 }
+
 
 html {
+
   scroll-behavior: smooth;
+
 }
+
 
 body {
+
   font-family: "DM Sans", sans-serif;
+
   background: var(--deep);
+
   color: white;
+
   overflow-x: hidden;
+
 }
 
-/* =========================
-   CURSOR
-========================= */
 
-.cursor-glow {
-  position: fixed;
-
-  width: 300px;
-  height: 300px;
-
-  border-radius: 50%;
-
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(75,230,255,.12),
-      transparent 65%
-    );
-
-  transform: translate(-50%, -50%);
-
-  z-index: 100;
-}
-
-/* =========================
-   NAV
-========================= */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 nav {
+
   position: fixed;
 
   top: 0;
+
   left: 0;
 
   width: 100%;
@@ -80,7 +101,9 @@ nav {
   padding: 25px 6%;
 
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   z-index: 20;
@@ -93,19 +116,30 @@ nav {
     );
 
   backdrop-filter: blur(8px);
+
 }
+
 
 .logo {
+
   font-size: 14px;
+
   font-weight: 700;
+
   letter-spacing: 4px;
+
 }
+
 
 .logo span {
+
   color: var(--cyan);
+
 }
 
+
 nav a {
+
   color: rgba(255,255,255,.65);
 
   text-decoration: none;
@@ -115,23 +149,31 @@ nav a {
   font-size: 12px;
 
   transition: .3s;
+
 }
+
 
 nav a:hover {
+
   color: var(--cyan);
+
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero {
+
   min-height: 100vh;
 
   position: relative;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   text-align: center;
@@ -151,9 +193,12 @@ nav a:hover {
       #011421 60%,
       #00040a
     );
+
 }
 
+
 .hero::after {
+
   content: "";
 
   position: absolute;
@@ -169,15 +214,20 @@ nav a:hover {
     );
 
   pointer-events: none;
+
 }
 
+
 .sunlight {
+
   position: absolute;
 
   width: 900px;
+
   height: 900px;
 
   top: -600px;
+
   left: 50%;
 
   transform: translateX(-50%);
@@ -196,25 +246,33 @@ nav a:hover {
 
   animation:
     sunlight 8s ease-in-out infinite alternate;
+
 }
+
 
 @keyframes sunlight {
 
   from {
+
     transform:
       translateX(-50%)
       rotate(-5deg);
+
   }
 
   to {
+
     transform:
       translateX(-50%)
       rotate(5deg);
+
   }
 
 }
 
+
 .hero-content {
+
   position: relative;
 
   z-index: 3;
@@ -222,9 +280,12 @@ nav a:hover {
   max-width: 1000px;
 
   padding: 120px 25px 80px;
+
 }
 
+
 .eyebrow {
+
   color: var(--cyan);
 
   font-size: 11px;
@@ -234,16 +295,20 @@ nav a:hover {
   letter-spacing: 5px;
 
   margin-bottom: 20px;
+
 }
 
+
 .hero h1 {
+
   font-family: "Playfair Display", serif;
 
-  font-size: clamp(
-    60px,
-    11vw,
-    150px
-  );
+  font-size:
+    clamp(
+      60px,
+      11vw,
+      150px
+    );
 
   line-height: .85;
 
@@ -260,9 +325,12 @@ nav a:hover {
   -webkit-background-clip: text;
 
   color: transparent;
+
 }
 
+
 .hero-description {
+
   max-width: 650px;
 
   margin: 35px auto;
@@ -272,49 +340,16 @@ nav a:hover {
   line-height: 1.8;
 
   font-size: 16px;
+
 }
 
-.hero-button {
-  display: inline-flex;
 
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 15px 25px;
-
-  border-radius: 100px;
-
-  border: 1px solid rgba(115,246,255,.4);
-
-  color: white;
-
-  text-decoration: none;
-
-  background: rgba(255,255,255,.05);
-
-  backdrop-filter: blur(10px);
-
-  transition: .35s;
-}
-
-.hero-button:hover {
-  background: var(--cyan);
-
-  color: #00202d;
-
-  transform: translateY(-4px);
-
-  box-shadow:
-    0 20px 60px
-    rgba(0,220,255,.2);
-}
-
-/* =========================
+/* =========================================================
    BUBBLES
-========================= */
+========================================================= */
 
 .bubbles span {
+
   position: absolute;
 
   bottom: -40px;
@@ -327,75 +362,118 @@ nav a:hover {
 
   animation:
     rise linear infinite;
+
 }
+
 
 .bubbles span:nth-child(1) {
+
   left: 10%;
+
   width: 8px;
+
   height: 8px;
+
   animation-duration: 12s;
+
 }
+
 
 .bubbles span:nth-child(2) {
+
   left: 25%;
+
   width: 14px;
+
   height: 14px;
+
   animation-duration: 16s;
+
   animation-delay: 3s;
+
 }
+
 
 .bubbles span:nth-child(3) {
+
   left: 42%;
+
   width: 6px;
+
   height: 6px;
+
   animation-duration: 10s;
+
   animation-delay: 2s;
+
 }
+
 
 .bubbles span:nth-child(4) {
+
   left: 67%;
+
   width: 18px;
+
   height: 18px;
+
   animation-duration: 18s;
+
   animation-delay: 5s;
+
 }
 
+
 .bubbles span:nth-child(5) {
+
   left: 85%;
+
   width: 9px;
+
   height: 9px;
+
   animation-duration: 13s;
+
 }
+
 
 @keyframes rise {
 
   0% {
+
     transform:
       translateY(0)
       translateX(0);
 
     opacity: 0;
+
   }
 
   10% {
+
     opacity: .5;
+
   }
 
   100% {
+
     transform:
       translateY(-110vh)
       translateX(50px);
 
     opacity: 0;
+
   }
 
 }
 
-/* =========================
+
+/* =========================================================
    INTRO
-========================= */
+========================================================= */
 
 .intro {
+
   padding: 140px 7%;
 
   background:
@@ -405,9 +483,12 @@ nav a:hover {
       transparent 30%
     ),
     #010914;
+
 }
 
+
 .intro-grid {
+
   max-width: 1200px;
 
   margin: auto;
@@ -420,9 +501,12 @@ nav a:hover {
   gap: 80px;
 
   align-items: center;
+
 }
 
+
 .intro h2 {
+
   font-family:
     "Playfair Display",
     serif;
@@ -435,21 +519,30 @@ nav a:hover {
   letter-spacing: -3px;
 
   margin-bottom: 30px;
+
 }
+
 
 .intro h2 span {
+
   color: var(--cyan);
+
 }
 
+
 .intro p {
+
   color: var(--muted);
 
   line-height: 1.9;
 
   margin-bottom: 20px;
+
 }
 
+
 .intro-image {
+
   height: 500px;
 
   border-radius: 30px;
@@ -461,11 +554,13 @@ nav a:hover {
     rgba(255,255,255,.08);
 
   background-image:
+
     linear-gradient(
       180deg,
       transparent 30%,
       rgba(0,5,10,.8)
     ),
+
     url("https://www.noaa.gov/sites/default/files/styles/landscape_width_650/public/2021-03/ship3224.jpg");
 
   background-size: cover;
@@ -475,149 +570,84 @@ nav a:hover {
   box-shadow:
     0 30px 100px
     rgba(0,0,0,.4);
+
 }
 
-/* =========================
-   DEPTH COUNTER
-========================= */
 
-.depth-section {
-  padding: 140px 7%;
+/* =========================================================
+   HISTORY
+   BACKGROUND IMAGE SECTION
+========================================================= */
 
-  text-align: center;
+.history {
+
+  padding: 150px 7%;
 
   position: relative;
 
   overflow: hidden;
 
   background:
-    radial-gradient(
-      circle at center,
-      rgba(0,130,180,.15),
-      transparent 45%
+
+    linear-gradient(
+      rgba(1,8,18,.78),
+      rgba(1,8,18,.92)
     ),
-    #00050b;
+
+    url("https://upload.wikimedia.org/wikipedia/commons/5/5c/HMS_Challenger.jpg");
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-attachment: fixed;
+
 }
 
-.depth-section h2 {
-  font-family:
-    "Playfair Display",
-    serif;
 
-  font-size:
-    clamp(40px, 6vw, 70px);
+/* Dark overlay */
 
-  margin-bottom: 20px;
-}
+.history::before {
 
-.depth-section > p {
-  max-width: 600px;
+  content: "";
 
-  margin: auto;
+  position: absolute;
 
-  color: var(--muted);
-
-  line-height: 1.8;
-}
-
-.depth-number {
-  font-size:
-    clamp(80px, 15vw, 190px);
-
-  font-weight: 700;
-
-  letter-spacing: -10px;
-
-  margin: 30px 0;
+  inset: 0;
 
   background:
     linear-gradient(
-      white,
-      var(--cyan)
+      180deg,
+      rgba(0,5,12,.35),
+      rgba(0,5,12,.75),
+      rgba(0,5,12,.95)
     );
 
-  -webkit-background-clip: text;
+  pointer-events: none;
 
-  color: transparent;
 }
 
-.depth-meter {
-  max-width: 800px;
 
-  height: 14px;
+.history > * {
 
-  margin: 50px auto 20px;
+  position: relative;
 
-  border-radius: 20px;
+  z-index: 2;
 
-  background:
-    rgba(255,255,255,.08);
-
-  overflow: hidden;
 }
 
-.depth-fill {
-  width: 0%;
-
-  height: 100%;
-
-  border-radius: inherit;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--cyan),
-      #087ea4,
-      #371c62
-    );
-
-  transition:
-    width 1s ease;
-}
-
-.depth-control {
-  width: min(800px, 90%);
-
-  accent-color: var(--cyan);
-}
-
-.depth-labels {
-  max-width: 800px;
-
-  margin: 12px auto;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  color: #577783;
-
-  font-size: 11px;
-}
-
-/* =========================
-   HISTORY
-========================= */
-
-.history {
-  padding: 150px 7%;
-
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      #063c50,
-      transparent 25%
-    ),
-    #010b15;
-}
 
 .history-header {
+
   max-width: 750px;
 
   margin-bottom: 80px;
+
 }
 
+
 .history-header h2 {
+
   font-family:
     "Playfair Display",
     serif;
@@ -628,25 +658,36 @@ nav a:hover {
   line-height: .9;
 
   margin: 15px 0;
+
 }
+
 
 .history-header p {
-  color: var(--muted);
+
+  color: #b4cbd2;
 
   line-height: 1.8;
+
 }
 
-/* timeline */
+
+/* =========================================================
+   TIMELINE
+========================================================= */
 
 .timeline {
+
   max-width: 1000px;
 
   margin: auto;
 
   position: relative;
+
 }
 
+
 .timeline::before {
+
   content: "";
 
   position: absolute;
@@ -654,6 +695,7 @@ nav a:hover {
   left: 50%;
 
   top: 0;
+
   bottom: 0;
 
   width: 1px;
@@ -661,35 +703,46 @@ nav a:hover {
   background:
     linear-gradient(
       transparent,
-      rgba(115,246,255,.35),
+      rgba(115,246,255,.45),
       transparent
     );
+
 }
 
+
 .timeline-item {
+
   width: 50%;
 
   padding: 25px 50px;
 
   position: relative;
 
-  cursor: pointer;
 }
+
 
 .timeline-item:nth-child(odd) {
+
   text-align: right;
+
 }
+
 
 .timeline-item:nth-child(even) {
+
   margin-left: 50%;
+
 }
 
+
 .timeline-dot {
+
   position: absolute;
 
   top: 35px;
 
   width: 14px;
+
   height: 14px;
 
   border-radius: 50%;
@@ -699,54 +752,235 @@ nav a:hover {
   box-shadow:
     0 0 25px
     rgba(115,246,255,.7);
+
 }
+
 
 .timeline-item:nth-child(odd)
 .timeline-dot {
+
   right: -7px;
+
 }
+
 
 .timeline-item:nth-child(even)
 .timeline-dot {
+
   left: -7px;
+
 }
 
+
+/* =========================================================
+   TIMELINE CARDS WITH PHOTOS
+========================================================= */
+
 .timeline-card {
+
+  min-height: 310px;
+
   padding: 30px;
 
   border-radius: 24px;
 
   border:
     1px solid
-    rgba(255,255,255,.07);
+    rgba(255,255,255,.12);
+
+  position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: flex-end;
+
+  background-size: cover;
+
+  background-position: center;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.35);
+
+  transition:
+    transform .4s,
+    border-color .4s;
+
+}
+
+
+/* Dark layer over each photo */
+
+.timeline-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
 
   background:
-    rgba(255,255,255,.035);
+    linear-gradient(
+      180deg,
+      rgba(0,5,10,.15),
+      rgba(0,5,10,.88)
+    );
 
-  backdrop-filter: blur(10px);
+  z-index: 0;
 
-  transition: .35s;
+  transition: .4s;
+
 }
+
 
 .timeline-card:hover {
-  transform: translateY(-7px);
+
+  transform:
+    translateY(-8px)
+    scale(1.015);
 
   border-color:
-    rgba(115,246,255,.25);
+    rgba(115,246,255,.45);
 
-  background:
-    rgba(115,246,255,.06);
 }
 
+
+.timeline-card:hover::before {
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,5,10,.05),
+      rgba(0,5,10,.78)
+    );
+
+}
+
+
+.timeline-card > * {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+
+/* =========================================================
+   TIMELINE IMAGES
+   CHANGE THESE URLS
+========================================================= */
+
+
+/* 1875 */
+
+.timeline-item:nth-child(1)
+.timeline-card {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/5/5c/HMS_Challenger.jpg");
+
+}
+
+
+/* 1960 - Trieste */
+
+.timeline-item:nth-child(2)
+.timeline-card {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/8/86/Trieste_bathyscaphe.jpg");
+
+}
+
+
+/* 1995 - Kaiko */
+
+.timeline-item:nth-child(3)
+.timeline-card {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/3/35/Kaiko_ROV.jpg");
+
+}
+
+
+/* 2009 - Nereus */
+
+.timeline-item:nth-child(4)
+.timeline-card {
+
+  background-image:
+    url("https://www.whoi.edu/wp-content/uploads/2019/03/nereus.jpg");
+
+}
+
+
+/* 2012 - James Cameron */
+
+.timeline-item:nth-child(5)
+.timeline-card {
+
+  background-image:
+    url("https://media.npr.org/assets/img/2013/05/23/deep-sea2-868e2038cd94129b8fec0344cdcb9054e2724654.jpg");
+
+}
+
+
+/* 2019 - Five Deeps */
+
+.timeline-item:nth-child(6)
+.timeline-card {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/7/73/Limiting_Factor_submersible.jpg");
+
+}
+
+
+/* 2020 */
+
+.timeline-item:nth-child(7)
+.timeline-card {
+
+  background-image:
+    url("https://www.noaa.gov/sites/default/files/styles/landscape_width_650/public/2021-03/ship3224.jpg");
+
+}
+
+
+/* 2021 */
+
+.timeline-item:nth-child(8)
+.timeline-card {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/1/1b/Mariana_Trench.jpg");
+
+}
+
+
+/* =========================================================
+   TIMELINE TEXT
+========================================================= */
+
 .timeline-year {
+
   color: var(--cyan);
 
   font-size: 12px;
 
   letter-spacing: 3px;
+
 }
 
+
 .timeline-card h3 {
+
   font-family:
     "Playfair Display",
     serif;
@@ -754,18 +988,26 @@ nav a:hover {
   font-size: 30px;
 
   margin: 10px 0;
+
 }
 
+
 .timeline-card p {
-  color: #7e9ca6;
+
+  color: #c0d0d5;
 
   line-height: 1.7;
 
   font-size: 14px;
+
 }
 
+
 .timeline-tag {
+
   display: inline-block;
+
+  width: fit-content;
 
   margin-top: 18px;
 
@@ -774,20 +1016,27 @@ nav a:hover {
   border-radius: 100px;
 
   background:
-    rgba(115,246,255,.07);
+    rgba(115,246,255,.12);
 
   color: var(--cyan);
 
   font-size: 9px;
 
   letter-spacing: 2px;
+
+  border:
+    1px solid
+    rgba(115,246,255,.18);
+
 }
 
-/* =========================
+
+/* =========================================================
    PEOPLE
-========================= */
+========================================================= */
 
 .people {
+
   padding: 140px 7%;
 
   background:
@@ -795,15 +1044,21 @@ nav a:hover {
       #010914,
       #00050a
     );
+
 }
 
+
 .people-header {
+
   max-width: 700px;
 
   margin-bottom: 60px;
+
 }
 
+
 .people-header h2 {
+
   font-family:
     "Playfair Display",
     serif;
@@ -812,15 +1067,21 @@ nav a:hover {
     clamp(45px, 6vw, 75px);
 
   margin: 15px 0;
+
 }
 
+
 .people-header p {
+
   color: var(--muted);
 
   line-height: 1.8;
+
 }
 
+
 .people-grid {
+
   max-width: 1200px;
 
   margin: auto;
@@ -831,16 +1092,23 @@ nav a:hover {
     repeat(4, 1fr);
 
   gap: 18px;
+
 }
 
+
+/* =========================================================
+   PEOPLE CARDS
+========================================================= */
+
 .person {
-  min-height: 300px;
+
+  min-height: 350px;
 
   padding: 25px;
 
   border:
     1px solid
-    rgba(255,255,255,.07);
+    rgba(255,255,255,.1);
 
   border-radius: 24px;
 
@@ -854,19 +1122,21 @@ nav a:hover {
 
   overflow: hidden;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,0),
-      rgba(0,4,8,.95)
-    );
+  background-size: cover;
+
+  background-position: center;
 
   transition:
     transform .4s,
     border-color .4s;
+
 }
 
+
+/* Image dark overlay */
+
 .person::before {
+
   content: "";
 
   position: absolute;
@@ -874,35 +1144,62 @@ nav a:hover {
   inset: 0;
 
   background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(115,246,255,.15),
-      transparent 45%
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.05),
+      rgba(0,4,8,.95)
     );
+
+  transition: .4s;
+
 }
 
+
 .person:hover {
+
   transform:
     translateY(-10px);
 
   border-color:
-    rgba(115,246,255,.25);
+    rgba(115,246,255,.35);
+
 }
+
+
+.person:hover::before {
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.02),
+      rgba(0,4,8,.82)
+    );
+
+}
+
 
 .person-content {
+
   position: relative;
+
   z-index: 2;
+
 }
 
+
 .person-year {
+
   color: var(--cyan);
 
   font-size: 10px;
 
   letter-spacing: 3px;
+
 }
 
+
 .person h3 {
+
   font-family:
     "Playfair Display",
     serif;
@@ -910,21 +1207,113 @@ nav a:hover {
   font-size: 25px;
 
   margin: 8px 0;
+
 }
 
+
 .person p {
-  color: #78949e;
+
+  color: #b8cbd0;
 
   font-size: 12px;
 
   line-height: 1.6;
+
 }
 
-/* =========================
+
+/* =========================================================
+   PEOPLE IMAGES
+   CHANGE THESE URLS
+========================================================= */
+
+
+/* Jacques Piccard */
+
+.person:nth-child(1) {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/7/7e/Jacques_Piccard.jpg");
+
+}
+
+
+/* Don Walsh */
+
+.person:nth-child(2) {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/4/4e/Don_Walsh.jpg");
+
+}
+
+
+/* James Cameron */
+
+.person:nth-child(3) {
+
+  background-image:
+    url("https://media.npr.org/assets/img/2013/05/23/deep-sea2-868e2038cd94129b8fec0344cdcb9054e2724654.jpg");
+
+}
+
+
+/* Victor Vescovo */
+
+.person:nth-child(4) {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/6/6c/Victor_Vescovo.jpg");
+
+}
+
+
+/* Kathy Sullivan */
+
+.person:nth-child(5) {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/0/09/Kathy_Sullivan.jpg");
+
+}
+
+
+/* Richard Garriott */
+
+.person:nth-child(6) {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/3/3d/Richard_Garriott.jpg");
+
+}
+
+
+/* Hamish Harding */
+
+.person:nth-child(7) {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/2/25/Hamish_Harding.jpg");
+
+}
+
+
+/* Nicole Yamase */
+
+.person:nth-child(8) {
+
+  background-image:
+    url("https://upload.wikimedia.org/wikipedia/commons/9/93/Nicole_Yamase.jpg");
+
+}
+
+
+/* =========================================================
    CAMERON FEATURE
-========================= */
+========================================================= */
 
 .feature {
+
   min-height: 700px;
 
   display: grid;
@@ -934,25 +1323,33 @@ nav a:hover {
 
   background:
     #00050a;
+
 }
 
+
 .feature-image {
+
   min-height: 600px;
 
   background:
+
     linear-gradient(
       90deg,
       transparent,
       rgba(0,5,10,.5)
     ),
+
     url("https://media.npr.org/assets/img/2013/05/23/deep-sea2-868e2038cd94129b8fec0344cdcb9054e2724654.jpg");
 
   background-size: cover;
 
   background-position: center;
+
 }
 
+
 .feature-content {
+
   padding: 100px 8%;
 
   display: flex;
@@ -960,9 +1357,12 @@ nav a:hover {
   flex-direction: column;
 
   justify-content: center;
+
 }
 
+
 .feature-content h2 {
+
   font-family:
     "Playfair Display",
     serif;
@@ -973,9 +1373,12 @@ nav a:hover {
   line-height: .95;
 
   margin: 15px 0 25px;
+
 }
 
+
 .feature-content p {
+
   color: var(--muted);
 
   line-height: 1.8;
@@ -983,21 +1386,27 @@ nav a:hover {
   max-width: 550px;
 
   margin-bottom: 18px;
+
 }
 
+
 .feature-number {
+
   font-size: 11px;
 
   letter-spacing: 4px;
 
   color: var(--cyan);
+
 }
 
-/* =========================
+
+/* =========================================================
    PRESSURE
-========================= */
+========================================================= */
 
 .pressure {
+
   padding: 150px 7%;
 
   text-align: center;
@@ -1009,9 +1418,12 @@ nav a:hover {
       transparent 40%
     ),
     #01040a;
+
 }
 
+
 .pressure h2 {
+
   font-family:
     "Playfair Display",
     serif;
@@ -1020,9 +1432,12 @@ nav a:hover {
     clamp(45px, 6vw, 80px);
 
   margin-bottom: 20px;
+
 }
 
+
 .pressure-intro {
+
   max-width: 600px;
 
   margin: auto;
@@ -1030,9 +1445,12 @@ nav a:hover {
   color: var(--muted);
 
   line-height: 1.8;
+
 }
 
+
 .pressure-display {
+
   max-width: 900px;
 
   margin: 70px auto 0;
@@ -1051,9 +1469,12 @@ nav a:hover {
       rgba(115,246,255,.04),
       rgba(70,20,130,.05)
     );
+
 }
 
+
 .pressure-value {
+
   font-size:
     clamp(50px, 9vw, 110px);
 
@@ -1062,21 +1483,27 @@ nav a:hover {
   color: white;
 
   letter-spacing: -5px;
+
 }
 
+
 .pressure-unit {
+
   color: var(--cyan);
 
   letter-spacing: 4px;
 
   font-size: 11px;
+
 }
 
-/* =========================
+
+/* =========================================================
    CTA
-========================= */
+========================================================= */
 
 .cta {
+
   min-height: 550px;
 
   display: flex;
@@ -1096,9 +1523,12 @@ nav a:hover {
       transparent 40%
     ),
     #010812;
+
 }
 
+
 .cta h2 {
+
   font-family:
     "Playfair Display",
     serif;
@@ -1109,19 +1539,26 @@ nav a:hover {
   line-height: .9;
 
   margin-bottom: 30px;
+
 }
 
+
 .cta p {
+
   color: var(--muted);
 
   max-width: 550px;
 
-  margin: auto auto 30px;
+  margin:
+    auto auto 30px;
 
   line-height: 1.8;
+
 }
 
+
 .cta a {
+
   display: inline-flex;
 
   padding: 15px 25px;
@@ -1137,21 +1574,28 @@ nav a:hover {
   font-weight: 700;
 
   transition: .3s;
+
 }
 
+
 .cta a:hover {
-  transform: translateY(-4px);
+
+  transform:
+    translateY(-4px);
 
   box-shadow:
     0 20px 60px
     rgba(0,220,255,.25);
+
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer {
+
   padding: 35px 7%;
 
   background: #000307;
@@ -1165,13 +1609,16 @@ footer {
   font-size: 10px;
 
   letter-spacing: 2px;
+
 }
 
-/* =========================
+
+/* =========================================================
    REVEAL ANIMATION
-========================= */
+========================================================= */
 
 .reveal {
+
   opacity: 0;
 
   transform:
@@ -1180,56 +1627,90 @@ footer {
   transition:
     opacity .8s ease,
     transform .8s ease;
+
 }
 
+
 .reveal.visible {
+
   opacity: 1;
 
   transform:
     translateY(0);
+
 }
 
-/* =========================
+
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
 @media(max-width: 900px) {
 
   nav .links {
+
     display: none;
+
   }
+
 
   .intro-grid {
+
     grid-template-columns: 1fr;
+
   }
+
 
   .intro-image {
+
     height: 400px;
+
   }
+
 
   .people-grid {
+
     grid-template-columns:
       repeat(2, 1fr);
+
   }
+
 
   .feature {
+
     grid-template-columns: 1fr;
+
   }
 
+
   .feature-image {
+
     min-height: 450px;
+
+  }
+
+
+  .history {
+
+    background-attachment: scroll;
+
   }
 
 }
 
+
 @media(max-width: 650px) {
 
   .timeline::before {
+
     left: 10px;
+
   }
+
 
   .timeline-item,
   .timeline-item:nth-child(even) {
+
     width: 100%;
 
     margin-left: 0;
@@ -1237,45 +1718,67 @@ footer {
     padding-left: 40px;
 
     text-align: left;
+
   }
+
 
   .timeline-item:nth-child(odd)
   .timeline-dot,
   .timeline-item:nth-child(even)
   .timeline-dot {
+
     left: 3px;
+
     right: auto;
+
   }
+
 
   .people-grid {
+
     grid-template-columns: 1fr;
+
   }
 
+
   footer {
+
     flex-direction: column;
+
     gap: 12px;
+
+  }
+
+
+  .history {
+
+    padding:
+      100px 5%;
+
   }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-<div class="cursor-glow"></div>
 
-
-<!-- =========================
+<!-- =========================================================
      NAVIGATION
-========================= -->
+========================================================= -->
 
 <nav>
 
   <div class="logo">
+
     CHALLENGER'S<span>/</span>DEPTH
+
   </div>
+
 
   <div class="links">
 
@@ -1300,20 +1803,26 @@ footer {
 </nav>
 
 
-<!-- =========================
+
+<!-- =========================================================
      HERO
-========================= -->
+========================================================= -->
 
 <section class="hero">
 
   <div class="sunlight"></div>
 
+
   <div class="bubbles">
 
     <span></span>
+
     <span></span>
+
     <span></span>
+
     <span></span>
+
     <span></span>
 
   </div>
@@ -1325,10 +1834,15 @@ footer {
       03 / The Deep
     </div>
 
+
     <h1>
+
       CHALLENGER<br>
+
       DEPTH
+
     </h1>
+
 
     <p class="hero-description">
 
@@ -1343,19 +1857,15 @@ footer {
 
     </p>
 
-  
-      Begin the descent
-      <span>↓</span>
-    </a>
-
   </div>
 
 </section>
 
 
-<!-- =========================
+
+<!-- =========================================================
      INTRO
-========================= -->
+========================================================= -->
 
 <section class="intro">
 
@@ -1367,10 +1877,17 @@ footer {
         Where Earth disappears
       </div>
 
+
       <h2>
+
         10,935 meters<br>
-        <span>below the surface.</span>
+
+        <span>
+          below the surface.
+        </span>
+
       </h2>
+
 
       <p>
 
@@ -1379,6 +1896,7 @@ footer {
 
       </p>
 
+
       <p>
 
         NOAA's current cited estimate places the deepest
@@ -1386,6 +1904,7 @@ footer {
         below mean sea level.
 
       </p>
+
 
       <p>
 
@@ -1405,84 +1924,32 @@ footer {
 </section>
 
 
-<!-- =========================
-     DEPTH INTERACTIVE
-========================= -->
 
-<section
-  class="depth-section"
-  id="depth"
->
-
-  <div class="eyebrow">
-    Interactive descent
-  </div>
-
-  <h2>
-    Dive into the numbers.
-  </h2>
-
-  <p>
-
-    Drag the slider downward and watch the depth
-    increase from the surface to Challenger Deep.
-
-  </p>
-
-  <div
-    class="depth-number"
-    id="depthNumber"
-  >
-    0m
-  </div>
-
-  <div class="depth-meter">
-
-    <div
-      class="depth-fill"
-      id="depthFill"
-    ></div>
-
-  </div>
-
-  <input
-    class="depth-control"
-    id="depthSlider"
-    type="range"
-    min="0"
-    max="10935"
-    value="0"
-  >
-
-  <div class="depth-labels">
-
-    <span>SURFACE</span>
-
-    <span>CHALLENGER DEPTH</span>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
+<!-- =========================================================
      HISTORY
-========================= -->
+========================================================= -->
 
 <section
   class="history"
   id="history"
 >
 
+
   <div class="history-header reveal">
 
     <div class="eyebrow">
+
       01 / A history of descent
+
     </div>
 
+
     <h2>
+
       Seven miles down.
+
     </h2>
+
 
     <p>
 
@@ -1498,14 +1965,18 @@ footer {
   </div>
 
 
+
   <div class="timeline">
 
 
-    <!-- 1875 -->
+    <!-- =====================================================
+         1875
+    ====================================================== -->
 
     <div class="timeline-item reveal">
 
       <div class="timeline-dot"></div>
+
 
       <div class="timeline-card">
 
@@ -1513,9 +1984,11 @@ footer {
           1875
         </div>
 
+
         <h3>
           HMS Challenger
         </h3>
+
 
         <p>
 
@@ -1526,8 +1999,11 @@ footer {
 
         </p>
 
+
         <div class="timeline-tag">
+
           FIRST SOUNDINGS
+
         </div>
 
       </div>
@@ -1535,11 +2011,15 @@ footer {
     </div>
 
 
-    <!-- 1960 -->
+
+    <!-- =====================================================
+         1960
+    ====================================================== -->
 
     <div class="timeline-item reveal">
 
       <div class="timeline-dot"></div>
+
 
       <div class="timeline-card">
 
@@ -1547,9 +2027,11 @@ footer {
           1960
         </div>
 
+
         <h3>
           Trieste
         </h3>
+
 
         <p>
 
@@ -1562,8 +2044,11 @@ footer {
 
         </p>
 
+
         <div class="timeline-tag">
+
           FIRST HUMANS
+
         </div>
 
       </div>
@@ -1571,11 +2056,15 @@ footer {
     </div>
 
 
-    <!-- 1995 -->
+
+    <!-- =====================================================
+         1995
+    ====================================================== -->
 
     <div class="timeline-item reveal">
 
       <div class="timeline-dot"></div>
+
 
       <div class="timeline-card">
 
@@ -1583,9 +2072,11 @@ footer {
           1995
         </div>
 
+
         <h3>
           Kaiko
         </h3>
+
 
         <p>
 
@@ -1596,8 +2087,11 @@ footer {
 
         </p>
 
+
         <div class="timeline-tag">
+
           ROBOTIC EXPLORATION
+
         </div>
 
       </div>
@@ -1605,11 +2099,15 @@ footer {
     </div>
 
 
-    <!-- 2009 -->
+
+    <!-- =====================================================
+         2009
+    ====================================================== -->
 
     <div class="timeline-item reveal">
 
       <div class="timeline-dot"></div>
+
 
       <div class="timeline-card">
 
@@ -1617,9 +2115,11 @@ footer {
           2009
         </div>
 
+
         <h3>
           Nereus
         </h3>
+
 
         <p>
 
@@ -1630,8 +2130,11 @@ footer {
 
         </p>
 
+
         <div class="timeline-tag">
+
           HYBRID VEHICLE
+
         </div>
 
       </div>
@@ -1639,11 +2142,15 @@ footer {
     </div>
 
 
-    <!-- 2012 -->
+
+    <!-- =====================================================
+         2012
+    ====================================================== -->
 
     <div class="timeline-item reveal">
 
       <div class="timeline-dot"></div>
+
 
       <div class="timeline-card">
 
@@ -1651,9 +2158,11 @@ footer {
           2012
         </div>
 
+
         <h3>
           James Cameron
         </h3>
+
 
         <p>
 
@@ -1663,8 +2172,11 @@ footer {
 
         </p>
 
+
         <div class="timeline-tag">
+
           SOLO DESCENT
+
         </div>
 
       </div>
@@ -1672,11 +2184,15 @@ footer {
     </div>
 
 
-    <!-- 2019 -->
+
+    <!-- =====================================================
+         2019
+    ====================================================== -->
 
     <div class="timeline-item reveal">
 
       <div class="timeline-dot"></div>
+
 
       <div class="timeline-card">
 
@@ -1684,9 +2200,11 @@ footer {
           2019
         </div>
 
+
         <h3>
           Five Deeps
         </h3>
+
 
         <p>
 
@@ -1696,8 +2214,11 @@ footer {
 
         </p>
 
+
         <div class="timeline-tag">
+
           REPEATED DIVES
+
         </div>
 
       </div>
@@ -1705,11 +2226,15 @@ footer {
     </div>
 
 
-    <!-- 2020 -->
+
+    <!-- =====================================================
+         2020
+    ====================================================== -->
 
     <div class="timeline-item reveal">
 
       <div class="timeline-dot"></div>
+
 
       <div class="timeline-card">
 
@@ -1717,9 +2242,11 @@ footer {
           2020
         </div>
 
+
         <h3>
           Ring of Fire
         </h3>
+
 
         <p>
 
@@ -1730,8 +2257,11 @@ footer {
 
         </p>
 
+
         <div class="timeline-tag">
+
           SCIENCE + EXPLORATION
+
         </div>
 
       </div>
@@ -1739,11 +2269,15 @@ footer {
     </div>
 
 
-    <!-- 2021 -->
+
+    <!-- =====================================================
+         2021
+    ====================================================== -->
 
     <div class="timeline-item reveal">
 
       <div class="timeline-dot"></div>
+
 
       <div class="timeline-card">
 
@@ -1751,9 +2285,11 @@ footer {
           2021
         </div>
 
+
         <h3>
           More explorers
         </h3>
+
 
         <p>
 
@@ -1765,8 +2301,11 @@ footer {
 
         </p>
 
+
         <div class="timeline-tag">
+
           NEW GENERATION
+
         </div>
 
       </div>
@@ -1778,25 +2317,34 @@ footer {
 </section>
 
 
-<!-- =========================
+
+<!-- =========================================================
      PEOPLE
-========================= -->
+========================================================= -->
 
 <section
   class="people"
   id="people"
 >
 
+
   <div class="people-header reveal">
 
     <div class="eyebrow">
+
       02 / The people
+
     </div>
 
+
     <h2>
+
       The humans<br>
+
       who went down.
+
     </h2>
+
 
     <p>
 
@@ -1810,8 +2358,11 @@ footer {
   </div>
 
 
+
   <div class="people-grid">
 
+
+    <!-- Jacques Piccard -->
 
     <div class="person reveal">
 
@@ -1820,21 +2371,28 @@ footer {
         <div class="person-year">
           1960
         </div>
+
 
         <h3>
           Jacques Piccard
         </h3>
 
+
         <p>
+
           Swiss ocean engineer and explorer.
           Co-pilot of Trieste during the first
           human descent.
+
         </p>
 
       </div>
 
     </div>
 
+
+
+    <!-- Don Walsh -->
 
     <div class="person reveal">
 
@@ -1844,19 +2402,26 @@ footer {
           1960
         </div>
 
+
         <h3>
           Don Walsh
         </h3>
 
+
         <p>
+
           U.S. Navy lieutenant and oceanographer.
           He piloted Trieste alongside Piccard.
+
         </p>
 
       </div>
 
     </div>
 
+
+
+    <!-- James Cameron -->
 
     <div class="person reveal">
 
@@ -1866,19 +2431,26 @@ footer {
           2012
         </div>
 
+
         <h3>
           James Cameron
         </h3>
 
+
         <p>
+
           Filmmaker and explorer who completed
           the first solo descent to Challenger Deep.
+
         </p>
 
       </div>
 
     </div>
 
+
+
+    <!-- Victor Vescovo -->
 
     <div class="person reveal">
 
@@ -1888,20 +2460,27 @@ footer {
           2019+
         </div>
 
+
         <h3>
           Victor Vescovo
         </h3>
 
+
         <p>
+
           Explorer and pilot of Limiting Factor,
           who made repeated descents and led the
           Five Deeps expedition.
+
         </p>
 
       </div>
 
     </div>
 
+
+
+    <!-- Kathy Sullivan -->
 
     <div class="person reveal">
 
@@ -1911,19 +2490,26 @@ footer {
           2020
         </div>
 
+
         <h3>
           Kathy Sullivan
         </h3>
 
+
         <p>
+
           Former NASA astronaut and geologist who
           became the first woman to reach Challenger Deep.
+
         </p>
 
       </div>
 
     </div>
 
+
+
+    <!-- Richard Garriott -->
 
     <div class="person reveal">
 
@@ -1932,20 +2518,27 @@ footer {
         <div class="person-year">
           2021
         </div>
+
 
         <h3>
           Richard Garriott
         </h3>
 
+
         <p>
+
           Explorer and game-industry pioneer who
           visited Challenger Deep as a mission specialist.
+
         </p>
 
       </div>
 
     </div>
 
+
+
+    <!-- Hamish Harding -->
 
     <div class="person reveal">
 
@@ -1954,20 +2547,27 @@ footer {
         <div class="person-year">
           2021
         </div>
+
 
         <h3>
           Hamish Harding
         </h3>
 
+
         <p>
+
           Explorer and aviation entrepreneur who
           descended with Vescovo in March 2021.
+
         </p>
 
       </div>
 
     </div>
 
+
+
+    <!-- Nicole Yamase -->
 
     <div class="person reveal">
 
@@ -1977,13 +2577,17 @@ footer {
           2021
         </div>
 
+
         <h3>
           Nicole Yamase
         </h3>
 
+
         <p>
+
           Marine scientist from the Federated States
           of Micronesia who descended to the western pool.
+
         </p>
 
       </div>
@@ -1996,11 +2600,13 @@ footer {
 </section>
 
 
-<!-- =========================
+
+<!-- =========================================================
      CAMERON FEATURE
-========================= -->
+========================================================= -->
 
 <section class="feature">
+
 
   <div class="feature-image"></div>
 
@@ -2008,12 +2614,18 @@ footer {
   <div class="feature-content reveal">
 
     <div class="feature-number">
+
       26 / 03 / 2012
+
     </div>
 
+
     <h2>
+
       Alone at the bottom.
+
     </h2>
+
 
     <p>
 
@@ -2023,6 +2635,7 @@ footer {
 
     </p>
 
+
     <p>
 
       On March 26, 2012, he descended alone into
@@ -2030,6 +2643,7 @@ footer {
       to make a solo descent.
 
     </p>
+
 
     <p>
 
@@ -2045,43 +2659,51 @@ footer {
 </section>
 
 
-<!-- =========================
+
+<!-- =========================================================
      PRESSURE
-========================= -->
+========================================================= -->
 
 <section class="pressure">
 
+
   <div class="eyebrow">
+
     Extreme environment
+
   </div>
 
+
   <h2>
+
     Imagine the pressure.
+
   </h2>
+
 
   <p class="pressure-intro">
 
-    Move your cursor across the panel below.
-    The pressure rises as you descend toward
-    Challenger Deep.
+    At Challenger Deep, pressure reaches
+    approximately 1,100 times the pressure
+    at sea level.
 
   </p>
 
 
-  <div
-    class="pressure-display"
-    id="pressureDisplay"
-  >
+  <div class="pressure-display">
 
-    <div
-      class="pressure-value"
-      id="pressureValue"
-    >
-      1
+
+    <div class="pressure-value">
+
+      1,100
+
     </div>
 
+
     <div class="pressure-unit">
+
       ATMOSPHERES
+
     </div>
 
   </div>
@@ -2089,22 +2711,31 @@ footer {
 </section>
 
 
-<!-- =========================
+
+<!-- =========================================================
      CTA
-========================= -->
+========================================================= -->
 
 <section class="cta">
+
 
   <div class="reveal">
 
     <div class="eyebrow">
+
       Keep exploring
+
     </div>
 
+
     <h2>
+
       The ocean<br>
+
       isn't finished.
+
     </h2>
+
 
     <p>
 
@@ -2114,8 +2745,11 @@ footer {
 
     </p>
 
+
     <a href="home.html">
+
       Return to Ocean Explorer →
+
     </a>
 
   </div>
@@ -2123,131 +2757,45 @@ footer {
 </section>
 
 
-<!-- =========================
+
+<!-- =========================================================
      FOOTER
-========================= -->
+========================================================= -->
 
 <footer>
 
   <span>
+
     CHALLENGER'S / DEPTH
+
   </span>
 
+
   <span>
+
     DISCOVER • PROTECT • EXPLORE
+
   </span>
 
 </footer>
 
 
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
 
-/* =========================
-   CURSOR GLOW
-========================= */
 
-const glow =
-  document.querySelector(".cursor-glow");
-
-document.addEventListener(
-  "mousemove",
-  e => {
-
-    glow.style.left =
-      e.clientX + "px";
-
-    glow.style.top =
-      e.clientY + "px";
-
-  }
-);
-
-
-/* =========================
-   DEPTH SLIDER
-========================= */
-
-const slider =
-  document.getElementById(
-    "depthSlider"
-  );
-
-const depthNumber =
-  document.getElementById(
-    "depthNumber"
-  );
-
-const depthFill =
-  document.getElementById(
-    "depthFill"
-  );
-
-
-slider.addEventListener(
-  "input",
-  () => {
-
-    const depth =
-      Number(slider.value);
-
-    const percentage =
-      (depth / 10935) * 100;
-
-    depthNumber.textContent =
-      depth.toLocaleString() + "m";
-
-    depthFill.style.width =
-      percentage + "%";
-
-  }
-);
-
-
-/* =========================
-   PRESSURE INTERACTION
-========================= */
-
-const pressureDisplay =
-  document.getElementById(
-    "pressureDisplay"
-  );
-
-const pressureValue =
-  document.getElementById(
-    "pressureValue"
-  );
-
-
-pressureDisplay.addEventListener(
-  "mousemove",
-  e => {
-
-    const rect =
-      pressureDisplay
-        .getBoundingClientRect();
-
-    const position =
-      (e.clientX - rect.left)
-      / rect.width;
-
-    const pressure =
-      Math.round(
-        1 + position * 1099
-      );
-
-    pressureValue.textContent =
-      pressure.toLocaleString();
-
-  }
-);
-
-
-/* =========================
+/* =========================================================
    SCROLL REVEAL
-========================= */
+========================================================= */
 
 const observer =
+
   new IntersectionObserver(
+
     entries => {
 
       entries.forEach(entry => {
@@ -2267,14 +2815,20 @@ const observer =
       });
 
     },
+
     {
+
       threshold: .15
+
     }
+
   );
 
 
 document
+
   .querySelectorAll(".reveal")
+
   .forEach(element => {
 
     observer.observe(element);
@@ -2282,28 +2836,9 @@ document
   });
 
 
-/* =========================
-   TIMELINE CLICK EFFECT
-========================= */
-
-document
-  .querySelectorAll(".timeline-card")
-  .forEach(card => {
-
-    card.addEventListener(
-      "click",
-      () => {
-
-        card.classList.toggle(
-          "expanded"
-        );
-
-      }
-    );
-
-  });
-
 </script>
 
+
 </body>
+
 </html>
